@@ -1,6 +1,6 @@
 # AWS Services Used
 
-## Amazon Bedrock (AI/ML)
+## <img src="/amazon-bedrock.png" alt="Bedrock" style="height:28px;vertical-align:middle;margin-right:8px;" /> Amazon Bedrock (AI/ML)
 
 Amazon Bedrock provides the foundation model inference that powers all AI features. CodeChronicle uses the **Amazon Nova** family of models via the Bedrock **Converse API**.
 
@@ -15,7 +15,7 @@ Amazon Bedrock provides the foundation model inference that powers all AI featur
 - Responses are parsed (summaries as plain text, risk scores and queries as JSON)
 - Results are cached in DynamoDB to minimize redundant model invocations
 
-## AWS Lambda (Serverless Compute)
+## <img src="/aws-lamda.png" alt="Lambda" style="height:28px;vertical-align:middle;margin-right:8px;" /> AWS Lambda (Serverless Compute)
 
 Five Lambda functions handle all backend logic, deployed via the Serverless Framework:
 
@@ -29,13 +29,13 @@ Five Lambda functions handle all backend logic, deployed via the Serverless Fram
 
 **Runtime:** Node.js 20.x | **Memory:** 512 MB | **Region:** Configurable (default `us-east-1`)
 
-## Amazon API Gateway (HTTP API)
+## <img src="/amazon-api-gateway-1.png" alt="API Gateway" style="height:28px;vertical-align:middle;margin-right:8px;" /> Amazon API Gateway (HTTP API)
 
 - **Type:** HTTP API (lightweight, low-latency)
 - **CORS:** Enabled for cross-origin webview requests
 - **Health Check:** `GET /cache/healthcheck` returns `{ cached: false }`
 
-## Amazon DynamoDB (NoSQL Database)
+## <img src="/DynamoDB.png" alt="DynamoDB" style="height:28px;vertical-align:middle;margin-right:8px;" /> Amazon DynamoDB (NoSQL Database)
 
 | Table | Purpose | Key Schema | TTL |
 |-------|---------|------------|-----|
