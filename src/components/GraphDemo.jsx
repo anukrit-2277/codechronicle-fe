@@ -34,6 +34,9 @@ export default function GraphDemo() {
 
     return (
         <section ref={sectionRef} id="graph-demo" className="relative py-24 sm:py-32">
+            {/* Ambient glow */}
+            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-neon-cyan/[0.04] rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-neon-purple/[0.04] rounded-full blur-[120px] pointer-events-none" />
             <div className="max-w-6xl mx-auto px-6">
                 {/* Header */}
                 <motion.div
@@ -45,7 +48,7 @@ export default function GraphDemo() {
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                         <span className="gradient-text">Interactive Architecture</span>
                     </h2>
-                    <p className="text-white/50 text-lg max-w-xl mx-auto">
+                    <p className="text-lg text-white/50 max-w-2xl mx-auto">
                         See your entire architecture instantly.
                     </p>
                 </motion.div>

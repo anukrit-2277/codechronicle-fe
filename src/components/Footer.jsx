@@ -1,7 +1,7 @@
 import { Github, FileText, Scale, User } from 'lucide-react'
 
 const links = [
-    { icon: Github, label: 'GitHub', href: 'https://github.com' },
+    { icon: Github, label: 'GitHub', href: 'https://github.com/anujkamaljain/CodeChronicle' },
     { icon: FileText, label: 'Documentation', href: '#' },
     { icon: Scale, label: 'MIT License', href: '#' },
     { icon: User, label: 'Author', href: '#' },
@@ -14,11 +14,7 @@ export default function Footer() {
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-8">
                     {/* Logo */}
                     <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-neon-cyan to-neon-purple flex items-center justify-center">
-                            <svg viewBox="0 0 24 24" className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </div>
+                        <img src="/logo1.png" alt="CodeChronicle" className="w-9 h-9 object-contain brightness-110" style={{ mixBlendMode: 'screen' }} />
                         <span className="text-lg font-semibold text-white/80">CodeChronicle</span>
                     </div>
 

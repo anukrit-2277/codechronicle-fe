@@ -197,7 +197,10 @@ export default function Screenshots() {
 
     return (
         <section ref={sectionRef} id="screenshots" className="relative py-24 sm:py-32">
-            <div className="max-w-5xl mx-auto px-6">
+            {/* Ambient glow */}
+            <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-neon-blue/[0.05] rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-0 right-1/3 w-[400px] h-[400px] bg-neon-cyan/[0.04] rounded-full blur-[120px] pointer-events-none" />
+            <div className="max-w-6xl mx-auto px-6">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -208,7 +211,7 @@ export default function Screenshots() {
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                         <span className="gradient-text">See It in Action</span>
                     </h2>
-                    <p className="text-white/50 text-lg max-w-xl mx-auto">
+                    <p className="text-lg text-white/50 max-w-2xl mx-auto">
                         Realistic previews of CodeChronicle inside VS Code.
                     </p>
                 </motion.div>

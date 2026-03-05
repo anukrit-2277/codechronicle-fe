@@ -8,21 +8,33 @@ const steps = [
         icon: FolderOpen,
         title: 'Open your project in VS Code',
         description: 'Open any project — TypeScript, Python, Go, Rust, or 15+ other languages.',
-        color: 'neon-cyan',
+        iconBg: 'bg-neon-cyan/10',
+        iconBorder: 'border-neon-cyan/20',
+        iconColor: 'text-neon-cyan',
+        badgeBg: 'bg-neon-cyan/10',
+        badgeText: 'text-neon-cyan',
     },
     {
         step: '02',
         icon: Scan,
         title: 'Run CodeChronicle Scan',
         description: 'One command to analyze your entire codebase. Results in under 2 seconds.',
-        color: 'neon-purple',
+        iconBg: 'bg-neon-purple/10',
+        iconBorder: 'border-neon-purple/20',
+        iconColor: 'text-neon-purple',
+        badgeBg: 'bg-neon-purple/10',
+        badgeText: 'text-neon-purple',
     },
     {
         step: '03',
         icon: Brain,
         title: 'Explore with AI',
         description: 'Navigate dependency graphs, predict blast radius, and ask questions in natural language.',
-        color: 'neon-blue',
+        iconBg: 'bg-neon-blue/10',
+        iconBorder: 'border-neon-blue/20',
+        iconColor: 'text-neon-blue',
+        badgeBg: 'bg-neon-blue/10',
+        badgeText: 'text-neon-blue',
     },
 ]
 
@@ -32,6 +44,9 @@ export default function HowItWorks() {
 
     return (
         <section ref={sectionRef} id="how-it-works" className="relative py-24 sm:py-32">
+            {/* Ambient glow */}
+            <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-neon-cyan/[0.05] rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-neon-blue/[0.04] rounded-full blur-[120px] pointer-events-none" />
             <div className="max-w-6xl mx-auto px-6">
                 {/* Header */}
                 <motion.div
@@ -43,7 +58,7 @@ export default function HowItWorks() {
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                         <span className="gradient-text">How It Works</span>
                     </h2>
-                    <p className="text-white/50 text-lg max-w-xl mx-auto">
+                    <p className="text-lg text-white/50 max-w-2xl mx-auto">
                         From install to insight in three simple steps.
                     </p>
                 </motion.div>
@@ -68,18 +83,12 @@ export default function HowItWorks() {
                                 </div>
 
                                 {/* Icon */}
-                                <div className={`
-                  w-20 h-20 rounded-2xl mx-auto mb-6
-                  bg-${step.color}/10 border border-${step.color}/20
-                  flex items-center justify-center
-                  transition-all duration-500 hover:scale-110
-                  hover:shadow-[0_0_40px_rgba(34,211,238,0.1)]
-                `}>
-                                    <step.icon className={`w-8 h-8 text-${step.color}`} />
+                                <div className={`w-20 h-20 rounded-2xl mx-auto mb-6 ${step.iconBg} border ${step.iconBorder} flex items-center justify-center transition-all duration-500 hover:scale-110 hover:shadow-[0_0_40px_rgba(34,211,238,0.1)]`}>
+                                    <step.icon className={`w-8 h-8 ${step.iconColor}`} />
                                 </div>
 
                                 {/* Step label */}
-                                <div className={`inline-block px-3 py-1 rounded-full bg-${step.color}/10 text-${step.color} text-xs font-mono font-medium mb-4`}>
+                                <div className={`inline-block px-3 py-1 rounded-full ${step.badgeBg} ${step.badgeText} text-xs font-mono font-medium mb-4`}>
                                     Step {step.step}
                                 </div>
 
@@ -89,7 +98,7 @@ export default function HowItWorks() {
                                 </h3>
 
                                 {/* Description */}
-                                <p className="text-white/45 text-sm leading-relaxed max-w-xs mx-auto">
+                                <p className="text-white/50 text-sm leading-relaxed max-w-xs mx-auto">
                                     {step.description}
                                 </p>
 

@@ -82,6 +82,9 @@ export default function Features() {
 
     return (
         <section ref={sectionRef} id="features" className="relative py-24 sm:py-32">
+            {/* Ambient glow */}
+            <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-neon-purple/[0.04] rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-neon-blue/[0.04] rounded-full blur-[120px] pointer-events-none" />
             <div className="max-w-6xl mx-auto px-6">
                 {/* Header */}
                 <motion.div
@@ -93,7 +96,7 @@ export default function Features() {
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                         <span className="gradient-text">Powerful Features</span>
                     </h2>
-                    <p className="text-white/50 text-lg max-w-xl mx-auto">
+                    <p className="text-lg text-white/50 max-w-2xl mx-auto">
                         Everything you need to understand, navigate, and maintain complex codebases.
                     </p>
                 </motion.div>
@@ -122,7 +125,7 @@ export default function Features() {
                             </h3>
 
                             {/* Description */}
-                            <p className="text-white/45 text-sm leading-relaxed group-hover:text-white/55 transition-colors">
+                            <p className="text-white/50 text-sm leading-relaxed group-hover:text-white/60 transition-colors">
                                 {feature.description}
                             </p>
 

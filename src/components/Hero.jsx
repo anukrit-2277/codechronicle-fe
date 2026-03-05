@@ -1,23 +1,11 @@
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ArrowRight, Github } from 'lucide-react'
-import gsap from 'gsap'
 import ThreeGraphBackground from './ThreeGraphBackground'
 
 export default function Hero() {
     const heroRef = useRef(null)
     const isInView = useInView(heroRef, { once: true })
-    const titleRef = useRef(null)
-
-    useEffect(() => {
-        if (titleRef.current) {
-            gsap.fromTo(
-                titleRef.current,
-                { opacity: 0, y: 40 },
-                { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out', delay: 0.3 }
-            )
-        }
-    }, [])
 
     return (
         <section
@@ -28,37 +16,26 @@ export default function Hero() {
             {/* 3D Background */}
             <ThreeGraphBackground />
 
-            {/* Gradient overlays */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#020617] z-[1]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#020617]/50 via-transparent to-[#020617]/50 z-[1]" />
+            {/* Gradient overlays — subtle side vignette only, no bottom cutoff */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#020617]/40 via-transparent to-[#020617]/40 z-[1]" />
 
             {/* Grid pattern */}
             <div className="absolute inset-0 grid-pattern z-[1] opacity-40" />
 
             {/* Content */}
-            <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-                {/* Badge */}
+            <div className="relative z-10 max-w-6xl mx-auto px-6 text-center pt-20">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 40 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6 }}
-                    className="mb-8"
+                    transition={{ duration: 1, delay: 0.3, ease: 'easeOut' }}
                 >
-                    <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-neon-cyan/20 bg-neon-cyan/5 text-neon-cyan text-sm font-medium">
-                        <span className="w-2 h-2 rounded-full bg-neon-cyan animate-pulse" />
-                        VS Code Extension
-                    </span>
-                </motion.div>
-
-                {/* Title */}
-                <div ref={titleRef} style={{ opacity: 0 }}>
                     <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none mb-6">
                         <span className="gradient-text">CodeChronicle</span>
                     </h1>
-                    <p className="text-xl sm:text-2xl md:text-3xl text-white/80 font-light mb-4 max-w-3xl mx-auto">
+                    <p className="text-xl sm:text-2xl md:text-3xl text-white/70 font-light mb-4 max-w-3xl mx-auto">
                         Understand Your Codebase Instantly
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Subtitle */}
                 <motion.p
@@ -79,23 +56,18 @@ export default function Hero() {
                     className="flex flex-col sm:flex-row gap-4 justify-center items-center"
                 >
                     <a
-                        href="vscode://code/install?itemName=YOUR_EXTENSION_ID"
-                        className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl
-                       bg-gradient-to-r from-neon-cyan to-neon-blue text-dark-900 font-semibold text-lg
-                       transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(34,211,238,0.3)]"
+                        href="vscode:extension/AnujKamalJain.codechronicle"
+                        className="group btn-primary text-lg"
                     >
                         Install Extension
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </a>
 
                     <a
-                        href="https://github.com"
+                        href="https://github.com/anujkamaljain/CodeChronicle"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-8 py-4 rounded-xl
-                       border border-white/10 text-white/70 font-medium text-lg
-                       hover:border-white/20 hover:text-white hover:bg-white/5
-                       transition-all duration-300"
+                        className="btn-secondary text-lg"
                     >
                         <Github className="w-5 h-5" />
                         View GitHub

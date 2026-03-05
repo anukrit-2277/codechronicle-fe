@@ -42,6 +42,9 @@ export default function Stats() {
 
     return (
         <section ref={sectionRef} className="relative py-24 sm:py-32">
+            {/* Ambient glow */}
+            <div className="absolute top-1/4 right-1/3 w-[500px] h-[500px] bg-neon-purple/[0.05] rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-neon-cyan/[0.04] rounded-full blur-[120px] pointer-events-none" />
             <div className="max-w-6xl mx-auto px-6">
                 {/* Header */}
                 <motion.div
@@ -53,7 +56,7 @@ export default function Stats() {
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                         <span className="gradient-text">Built for Scale</span>
                     </h2>
-                    <p className="text-white/50 text-lg max-w-xl mx-auto">
+                    <p className="text-lg text-white/50 max-w-2xl mx-auto">
                         Performance that matches your ambition.
                     </p>
                 </motion.div>
@@ -81,7 +84,7 @@ export default function Stats() {
                                 />
                             </div>
 
-                            <p className="text-white/45 text-sm">{stat.label}</p>
+                            <p className="text-white/50 text-sm">{stat.label}</p>
                         </motion.div>
                     ))}
                 </div>
