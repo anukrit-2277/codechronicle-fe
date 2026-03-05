@@ -81,7 +81,7 @@ export default function Features() {
     const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
     return (
-        <section ref={sectionRef} id="features" className="relative min-h-screen flex flex-col justify-center py-16 sm:py-20 scroll-mt-20 overflow-hidden">
+        <section ref={sectionRef} id="features" className="relative min-h-screen flex flex-col justify-center py-8 sm:py-10 scroll-mt-20 overflow-hidden">
             {/* Ambient glow */}
             <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-neon-purple/[0.04] rounded-full blur-[150px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-neon-blue/[0.04] rounded-full blur-[120px] pointer-events-none" />

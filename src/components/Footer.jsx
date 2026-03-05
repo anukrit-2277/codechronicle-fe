@@ -1,10 +1,9 @@
-import { Github, FileText, Scale, User } from 'lucide-react'
+import { Github, FileText } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const links = [
-    { icon: Github, label: 'GitHub', href: 'https://github.com/anujkamaljain/CodeChronicle' },
-    { icon: FileText, label: 'Documentation', href: '#' },
-    { icon: Scale, label: 'MIT License', href: '#' },
-    { icon: User, label: 'Author', href: '#' },
+    { icon: Github, label: 'GitHub', href: 'https://github.com/anujkamaljain/CodeChronicle', external: true },
+    { icon: FileText, label: 'Documentation', to: '/docs', external: false },
 ]
 
 export default function Footer() {
@@ -20,18 +19,29 @@ export default function Footer() {
 
                     {/* Links */}
                     <div className="flex flex-wrap items-center justify-center gap-6">
-                        {links.map((link, i) => (
-                            <a
-                                key={i}
-                                href={link.href}
-                                target={link.href.startsWith('http') ? '_blank' : undefined}
-                                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                className="flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors"
-                            >
-                                <link.icon className="w-4 h-4" />
-                                {link.label}
-                            </a>
-                        ))}
+                        {links.map((link, i) =>
+                            link.external ? (
+                                <a
+                                    key={i}
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors"
+                                >
+                                    <link.icon className="w-4 h-4" />
+                                    {link.label}
+                                </a>
+                            ) : (
+                                <Link
+                                    key={i}
+                                    to={link.to}
+                                    className="flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors"
+                                >
+                                    <link.icon className="w-4 h-4" />
+                                    {link.label}
+                                </Link>
+                            )
+                        )}
                     </div>
                 </div>
 

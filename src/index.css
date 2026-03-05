@@ -207,3 +207,42 @@ body {
    - Section padding: py-24 sm:py-32
    - Content max-width: max-w-6xl
 */
+
+/* ========== DOCUMENTATION PAGE ========== */
+.docs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  margin: 1rem 0;
+}
+
+.docs-table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  white-space: nowrap;
+}
+
+.docs-table td {
+  padding: 0.625rem 1rem;
+  color: rgba(255, 255, 255, 0.45);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  line-height: 1.5;
+}
+
+.docs-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.docs-code {
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.375rem;
+  background: rgba(255, 255, 255, 0.06);
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: rgba(34, 211, 238, 0.7);
+}

@@ -33,7 +33,7 @@ export default function GraphDemo() {
     const getNodeById = (id) => graphNodes.find((n) => n.id === id)
 
     return (
-        <section ref={sectionRef} id="graph-demo" className="relative min-h-screen flex flex-col justify-center py-24 sm:py-32 scroll-mt-20 overflow-hidden">
+        <section ref={sectionRef} id="graph-demo" className="relative min-h-screen flex flex-col justify-center pt-4 pb-12 scroll-mt-28 overflow-hidden">
             {/* Ambient glow */}
             <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-neon-cyan/[0.04] rounded-full blur-[150px] pointer-events-none" />
             <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-neon-purple/[0.04] rounded-full blur-[120px] pointer-events-none" />
@@ -43,7 +43,7 @@ export default function GraphDemo() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8 }}
-                    className="text-center mb-16"
+                    className="text-center mb-8"
                 >
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                         <span className="gradient-text">Interactive Architecture</span>
