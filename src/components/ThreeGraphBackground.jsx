@@ -18,9 +18,9 @@ function GraphNodes({ count = 80 }) {
         ]
 
         for (let i = 0; i < count; i++) {
-            positions[i * 3] = (Math.random() - 0.5) * 20
-            positions[i * 3 + 1] = (Math.random() - 0.5) * 14
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 10
+            positions[i * 3] = (Math.random() - 0.5) * 40
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 30
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 25
 
             const c = palette[Math.floor(Math.random() * palette.length)]
             colors[i * 3] = c[0]
@@ -38,11 +38,11 @@ function GraphNodes({ count = 80 }) {
         if (mesh.current) {
             const pos = mesh.current.geometry.attributes.position.array
             for (let i = 0; i < count; i++) {
-                pos[i * 3] += Math.sin(time * 0.3 + i * 0.5) * 0.002
-                pos[i * 3 + 1] += Math.cos(time * 0.2 + i * 0.3) * 0.002
+                pos[i * 3] += Math.sin(time * 0.06 + i * 0.5) * 0.0004
+                pos[i * 3 + 1] += Math.cos(time * 0.04 + i * 0.3) * 0.0004
             }
             mesh.current.geometry.attributes.position.needsUpdate = true
-            mesh.current.rotation.y = time * 0.02
+            mesh.current.rotation.y = time * 0.006
         }
     })
 
@@ -83,12 +83,12 @@ function GraphEdges({ count = 40 }) {
         const colors = new Float32Array(count * 6)
 
         for (let i = 0; i < count; i++) {
-            const x1 = (Math.random() - 0.5) * 18
-            const y1 = (Math.random() - 0.5) * 12
-            const z1 = (Math.random() - 0.5) * 8
-            const x2 = x1 + (Math.random() - 0.5) * 6
-            const y2 = y1 + (Math.random() - 0.5) * 4
-            const z2 = z1 + (Math.random() - 0.5) * 4
+            const x1 = (Math.random() - 0.5) * 36
+            const y1 = (Math.random() - 0.5) * 28
+            const z1 = (Math.random() - 0.5) * 20
+            const x2 = x1 + (Math.random() - 0.5) * 8
+            const y2 = y1 + (Math.random() - 0.5) * 6
+            const z2 = z1 + (Math.random() - 0.5) * 6
 
             positions[i * 6] = x1
             positions[i * 6 + 1] = y1
@@ -111,8 +111,8 @@ function GraphEdges({ count = 40 }) {
 
     useFrame((state) => {
         if (linesRef.current) {
-            linesRef.current.rotation.y = state.clock.elapsedTime * 0.015
-            linesRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.05
+            linesRef.current.rotation.y = state.clock.elapsedTime * 0.005
+            linesRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.03) * 0.02
         }
     })
 
@@ -148,19 +148,19 @@ function FloatingOrbs() {
 
     useFrame((state) => {
         if (group.current) {
-            group.current.rotation.y = state.clock.elapsedTime * 0.05
+            group.current.rotation.y = state.clock.elapsedTime * 0.015
         }
     })
 
     return (
         <group ref={group}>
-            {[...Array(5)].map((_, i) => (
+            {[...Array(8)].map((_, i) => (
                 <mesh
                     key={i}
                     position={[
-                        Math.sin(i * 1.3) * 6,
-                        Math.cos(i * 1.7) * 3,
-                        Math.sin(i * 2.1) * 4 - 5,
+                        Math.sin(i * 0.9) * 14,
+                        Math.cos(i * 1.1) * 10,
+                        Math.sin(i * 1.5) * 8 - 5,
                     ]}
                 >
                     <sphereGeometry args={[0.15 + i * 0.05, 16, 16]} />
@@ -177,7 +177,7 @@ function FloatingOrbs() {
 
 export default function ThreeGraphBackground() {
     return (
-        <div className="absolute inset-0 z-0">
+        <div className="fixed inset-0 z-0 pointer-events-none">
             <Canvas
                 camera={{ position: [0, 0, 10], fov: 60 }}
                 dpr={[1, 1.5]}

@@ -25,12 +25,16 @@ function GlowOrb({ color = 'cyan', position = 'left', top = '0px' }) {
 }
 
 import Navbar from '../components/Navbar'
+import ThreeGraphBackground from '../components/ThreeGraphBackground'
 
 export default function Home() {
     return (
         <main className="relative min-h-screen overflow-hidden">
             {/* Navbar */}
             <Navbar />
+
+            {/* 3D animated background — fixed across entire page */}
+            <ThreeGraphBackground />
 
             {/* Persistent particle background */}
             <PersistentBackground />

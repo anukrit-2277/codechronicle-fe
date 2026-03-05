@@ -1,7 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ArrowRight, Github } from 'lucide-react'
-import ThreeGraphBackground from './ThreeGraphBackground'
 
 export default function Hero() {
     const heroRef = useRef(null)
@@ -13,8 +12,6 @@ export default function Hero() {
             id="hero"
             className="relative min-h-screen flex items-center justify-center overflow-hidden"
         >
-            {/* 3D Background */}
-            <ThreeGraphBackground />
 
             {/* Gradient overlays — subtle side vignette only, no bottom cutoff */}
             <div className="absolute inset-0 bg-gradient-to-r from-[#020617]/40 via-transparent to-[#020617]/40 z-[1]" />

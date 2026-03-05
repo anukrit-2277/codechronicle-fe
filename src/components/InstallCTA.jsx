@@ -7,7 +7,7 @@ export default function InstallCTA() {
     const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
     return (
-        <section ref={sectionRef} id="install" className="relative py-24 sm:py-32">
+        <section ref={sectionRef} id="install" className="relative min-h-screen flex flex-col justify-center py-24 sm:py-32 scroll-mt-20 overflow-hidden">
             <div className="max-w-6xl mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}

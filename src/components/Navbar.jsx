@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
-    { label: 'Graph', href: '#graph-demo' },
+    { label: 'Architecture', href: '#graph-demo' },
     { label: 'Features', href: '#features' },
     { label: 'How It Works', href: '#how-it-works' },
     { label: 'Preview', href: '#screenshots' },
@@ -40,7 +40,8 @@ export default function Navbar() {
         setMobileOpen(false)
         const el = document.querySelector(href)
         if (el) {
-            el.scrollIntoView({ behavior: 'smooth' })
+            const top = el.getBoundingClientRect().top + window.scrollY - 96
+            window.scrollTo({ top, behavior: 'smooth' })
         }
     }
 
@@ -56,7 +57,7 @@ export default function Navbar() {
                     }`}
             >
                 <div className="max-w-6xl mx-auto px-6">
-                    <div className="flex items-center justify-between h-16">
+                    <div className="flex items-center justify-between h-20">
                         {/* Logo */}
                         <a
                             href="#hero"
@@ -133,7 +134,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.2 }}
-                        className="fixed inset-x-0 top-16 z-40 bg-[#020617]/95 backdrop-blur-xl border-b border-white/[0.06] md:hidden"
+                        className="fixed inset-x-0 top-20 z-40 bg-[#020617]/95 backdrop-blur-xl border-b border-white/[0.06] md:hidden"
                     >
                         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
                             {navLinks.map((link) => {
