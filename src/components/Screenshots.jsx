@@ -25,7 +25,7 @@ const screenshots = [
     },
 ]
 
-function MockScreenshot({ screenshot, index }) {
+function MockScreenshot({ screenshot, index, onTabClick }) {
     const colors = ['#22d3ee', '#a78bfa', '#60a5fa', '#22d3ee']
     const color = colors[index % colors.length]
 
@@ -43,19 +43,20 @@ function MockScreenshot({ screenshot, index }) {
 
             {/* Content */}
             <div className="p-6 min-h-[300px] sm:min-h-[360px] bg-dark-900/60">
-                {/* Tab bar */}
+                {/* Tab bar — clickable */}
                 <div className="flex gap-2 mb-6">
                     {screenshots.map((s, i) => (
-                        <div
+                        <button
                             key={i}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all
+                            onClick={() => onTabClick(i)}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer
                 ${i === index
                                     ? 'bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/20'
                                     : 'text-white/30 hover:text-white/50'
                                 }`}
                         >
                             {s.tab}
-                        </div>
+                        </button>
                     ))}
                 </div>
 
@@ -209,10 +210,10 @@ export default function Screenshots() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-                        <span className="gradient-text">See It in Action</span>
+                        <span className="gradient-text">Inside Your Editor</span>
                     </h2>
                     <p className="text-lg text-white/50 max-w-2xl mx-auto">
-                        Realistic previews of CodeChronicle inside VS Code.
+                        Powerful insights without leaving VS Code — graphs, blast radius, AI queries, and risk dashboards.
                     </p>
                 </motion.div>
 
@@ -231,7 +232,7 @@ export default function Screenshots() {
                             exit={{ opacity: 0, x: -30 }}
                             transition={{ duration: 0.4 }}
                         >
-                            <MockScreenshot screenshot={screenshots[current]} index={current} />
+                            <MockScreenshot screenshot={screenshots[current]} index={current} onTabClick={setCurrent} />
                         </motion.div>
                     </AnimatePresence>
 

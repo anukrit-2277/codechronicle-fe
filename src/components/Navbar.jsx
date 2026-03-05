@@ -6,7 +6,7 @@ const navLinks = [
     { label: 'Graph', href: '#graph-demo' },
     { label: 'Features', href: '#features' },
     { label: 'How It Works', href: '#how-it-works' },
-    { label: 'Screenshots', href: '#screenshots' },
+    { label: 'Preview', href: '#screenshots' },
 ]
 
 export default function Navbar() {
