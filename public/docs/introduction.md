@@ -1,4 +1,4 @@
-# CodeChronicle ⚡
+# CodeChronicle
 
 **AI-Powered VS Code Extension for Codebase Understanding, Interactive Dependency Graphs, Blast Radius Prediction, and Natural Language Exploration**
 

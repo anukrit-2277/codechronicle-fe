@@ -27,16 +27,16 @@ export default function Hero() {
             <div className="absolute inset-0 grid-pattern z-[1] opacity-40" />
 
             {/* Content */}
-            <div className="relative z-10 max-w-6xl mx-auto px-6 text-center pt-20">
+            <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center pt-20">
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 1, delay: 0.3, ease: 'easeOut' }}
                 >
-                    <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none mb-6">
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold tracking-tight leading-none mb-4 sm:mb-6">
                         <span className="gradient-text">CodeChronicle</span>
                     </h1>
-                    <p className="text-xl sm:text-2xl md:text-3xl text-white/70 font-light mb-4 max-w-3xl mx-auto">
+                    <p className="text-lg sm:text-xl md:text-3xl text-white/70 font-light mb-4 max-w-3xl mx-auto">
                         Understand Your Codebase Instantly
                     </p>
                 </motion.div>
@@ -46,7 +46,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8, delay: 0.6 }}
-                    className="text-base sm:text-lg text-white/50 max-w-2xl mx-auto mb-10 leading-relaxed"
+                    className="text-sm sm:text-base md:text-lg text-white/50 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2"
                 >
                     AI-Powered Dependency Graphs, Blast Radius Prediction, and Natural Language
                     Code Exploration — directly inside VS Code.
@@ -88,9 +88,9 @@ export default function Hero() {
                     <div className="inline-flex items-center w-full max-w-lg rounded-xl bg-[#020617] border border-white/[0.08]"
                         style={{ boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.4)' }}
                     >
-                        <div className="flex items-center gap-3 px-5 py-3.5 w-full">
-                            <span className="text-neon-cyan/70 text-sm font-mono font-bold select-none">$</span>
-                            <code className="text-sm font-mono text-white/55 flex-1 truncate">
+                        <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-3.5 w-full">
+                            <span className="text-neon-cyan/70 text-[10px] sm:text-sm font-mono font-bold select-none">$</span>
+                            <code className="text-[10px] sm:text-sm font-mono text-white/55 flex-1 truncate">
                                 code --install-extension AnujKamalJain.codechronicle
                             </code>
                             <button

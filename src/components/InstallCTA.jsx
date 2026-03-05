@@ -16,14 +16,14 @@ export default function InstallCTA() {
     }
 
     return (
-        <section ref={sectionRef} id="install" className="relative min-h-screen flex flex-col justify-center py-24 sm:py-32 scroll-mt-20 overflow-hidden">
+        <section ref={sectionRef} id="install" className="relative min-h-[auto] sm:min-h-screen flex flex-col justify-center py-16 sm:py-32 scroll-mt-20 overflow-hidden">
             {/* Ambient lighting */}
             <div className="absolute top-1/4 left-[10%] w-[500px] h-[500px] rounded-full blur-[180px] pointer-events-none"
                 style={{ background: 'radial-gradient(circle, rgba(34,211,238,0.08) 0%, transparent 60%)' }} />
             <div className="absolute bottom-1/4 right-[10%] w-[500px] h-[500px] rounded-full blur-[180px] pointer-events-none"
                 style={{ background: 'radial-gradient(circle, rgba(167,139,250,0.08) 0%, transparent 60%)' }} />
 
-            <div className="max-w-4xl mx-auto px-6 w-full text-center">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 w-full text-center">
                 {/* Logo */}
                 <motion.div
                     initial={{ scale: 0.5, opacity: 0 }}
@@ -110,8 +110,8 @@ export default function InstallCTA() {
                         style={{ boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.4)' }}
                     >
                         <div className="flex items-center gap-3 px-5 py-4 w-full">
-                            <span className="text-neon-cyan/70 text-sm font-mono font-bold select-none">$</span>
-                            <code className="text-sm font-mono text-white/55 flex-1 truncate">
+                            <span className="text-neon-cyan/70 text-xs sm:text-sm font-mono font-bold select-none">$</span>
+                            <code className="text-xs sm:text-sm font-mono text-white/55 flex-1 truncate">
                                 {COMMAND}
                             </code>
                             <button

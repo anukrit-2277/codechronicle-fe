@@ -41,17 +41,17 @@ export default function Stats() {
     const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
     return (
-        <section ref={sectionRef} className="relative min-h-screen flex flex-col justify-center py-8 sm:py-10 scroll-mt-20 overflow-hidden">
+        <section ref={sectionRef} className="relative min-h-[auto] sm:min-h-screen flex flex-col justify-center py-12 sm:py-10 scroll-mt-20 overflow-hidden">
             {/* Ambient glow */}
             <div className="absolute top-1/4 right-1/3 w-[500px] h-[500px] bg-neon-purple/[0.05] rounded-full blur-[150px] pointer-events-none" />
             <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-neon-cyan/[0.04] rounded-full blur-[120px] pointer-events-none" />
-            <div className="max-w-6xl mx-auto px-6">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8 }}
-                    className="text-center mb-16"
+                    className="text-center mb-10 sm:mb-16"
                 >
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                         <span className="gradient-text">Built for Scale</span>

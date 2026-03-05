@@ -37,7 +37,7 @@ export default function GraphDemo() {
             {/* Ambient glow */}
             <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-neon-cyan/[0.04] rounded-full blur-[150px] pointer-events-none" />
             <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-neon-purple/[0.04] rounded-full blur-[120px] pointer-events-none" />
-            <div className="max-w-6xl mx-auto px-6">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -71,7 +71,7 @@ export default function GraphDemo() {
                             <span className="text-xs text-white/30 font-mono ml-2">codechronicle — graph explorer</span>
                         </div>
 
-                        <div className="relative bg-dark-900/60 rounded-xl" style={{ height: 'min(500px, 60vh)' }}>
+                        <div className="relative bg-dark-900/60 rounded-xl" style={{ height: 'min(500px, 50vh)' }}>
                             <svg className="w-full h-full" viewBox="0 0 100 95">
                                 {/* Edges */}
                                 {graphEdges.map(([from, to], i) => {

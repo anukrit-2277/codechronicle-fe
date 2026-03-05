@@ -84,23 +84,25 @@ export default function Docs() {
         <div className="min-h-screen bg-[#020617]">
             {/* Top bar */}
             <div className="sticky top-0 z-50 bg-[#020617]/90 backdrop-blur-xl border-b border-white/[0.06]">
-                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 h-14 flex items-center gap-4">
-                    <button
-                        onClick={() => setSidebarOpen(!sidebarOpen)}
-                        className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors"
-                    >
-                        {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-                    </button>
-                    <Link to="/" className="flex items-center gap-2 text-white/50 hover:text-white transition-colors text-sm">
-                        <ArrowLeft className="w-4 h-4" />
-                        <span className="hidden sm:inline">Back to Home</span>
-                    </Link>
-                    <span className="text-white/10">|</span>
+                <div className="w-full px-4 sm:px-8 h-14 flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                        <button
+                            onClick={() => setSidebarOpen(!sidebarOpen)}
+                            className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors"
+                        >
+                            {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                        </button>
+                        <Link to="/" className="flex items-center gap-2 text-white/50 hover:text-white transition-colors text-sm">
+                            <ArrowLeft className="w-4 h-4" />
+                            <span className="hidden sm:inline">Back to Home</span>
+                        </Link>
+                    </div>
                     <div className="flex items-center gap-2">
                         <img src="/logo1.png" alt="CodeChronicle" className="w-5 h-5 object-contain brightness-110" style={{ mixBlendMode: 'screen' }} />
                         <span className="text-sm font-semibold text-white/70">Documentation</span>
                     </div>
                 </div>
+                
             </div>
 
             <div className="max-w-[1400px] mx-auto flex">
