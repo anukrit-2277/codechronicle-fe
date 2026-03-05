@@ -29,13 +29,13 @@ Five Lambda functions handle all backend logic, deployed via the Serverless Fram
 
 **Runtime:** Node.js 20.x | **Memory:** 512 MB | **Region:** Configurable (default `us-east-1`)
 
-## <img src="/amazon-api-gateway-1.png" alt="API Gateway" style="height:28px;vertical-align:middle;margin-right:8px;" /> Amazon API Gateway (HTTP API)
+## <img src="/aws-api-gateway.webp" alt="API Gateway" style="height:28px;vertical-align:middle;margin-right:8px;" /> Amazon API Gateway (HTTP API)
 
 - **Type:** HTTP API (lightweight, low-latency)
 - **CORS:** Enabled for cross-origin webview requests
 - **Health Check:** `GET /cache/healthcheck` returns `{ cached: false }`
 
-## <img src="/DynamoDB.png" alt="DynamoDB" style="height:28px;vertical-align:middle;margin-right:8px;" /> Amazon DynamoDB (NoSQL Database)
+## <img src="/aws-dynamo-db.jpeg" alt="DynamoDB" style="height:28px;vertical-align:middle;margin-right:8px;" /> Amazon DynamoDB (NoSQL Database)
 
 | Table | Purpose | Key Schema | TTL |
 |-------|---------|------------|-----|
@@ -43,3 +43,41 @@ Five Lambda functions handle all backend logic, deployed via the Serverless Fram
 | `codechronicle-backend-risks-{stage}` | Cached AI risk assessments | `fileHash` (HASH) + `filePath` (RANGE) | 7 days |
 
 **Billing:** PAY_PER_REQUEST (on-demand) — you only pay for what you use.
+
+## <img src="/aws-cloud-watch.png" alt="CloudWatch" style="height:28px;vertical-align:middle;margin-right:8px;" /> AWS CloudWatch (Logging & Monitoring)
+
+The backend uses **AWS CloudWatch Logs** for centralized logging across all Lambda functions. **No additional SDK or logging library is required** — AWS Lambda automatically integrates with CloudWatch by default.
+
+### IAM Permissions
+
+The following permissions are granted via `serverless.yml` to enable CloudWatch logging:
+
+```yaml
+Action:
+  - logs:CreateLogGroup
+  - logs:CreateLogStream
+  - logs:PutLogEvents
+Resource: '*'
+```
+
+### How It Works
+
+AWS Lambda automatically captures all `console.log`, `console.warn`, and `console.error` output and sends it to CloudWatch Logs. No additional setup, SDK imports, or configuration is needed.
+
+### Backend Logging Coverage
+
+| Handler | What's Logged |
+|---------|---------------|
+| `aiHandler.js` | Cache hits for summaries, generated summary results, errors during AI explanation generation |
+| `riskEngine.js` | Cache hits for risk analysis, risk assessment results, risk assessment errors |
+| `cacheService.js` | Cache writes for summaries and risk scores, cache read/write errors |
+
+### How to View Logs
+
+1. Open the **AWS Console**
+2. Navigate to **CloudWatch**
+3. Go to **Log Groups** in the left sidebar
+4. Select the Lambda function log group (e.g., `/aws/lambda/codechronicle-backend-{stage}-aiExplain`)
+5. Click on a **Log Stream** to view logs for each invocation
+
+> **Note:** Each Lambda function creates its own log group automatically. Log streams are organized by invocation, making it easy to trace individual requests.
