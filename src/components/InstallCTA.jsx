@@ -98,38 +98,6 @@ export default function InstallCTA() {
                         View on GitHub
                     </a>
                 </motion.div>
-
-                {/* Terminal command */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.7, delay: 0.6 }}
-                    className="flex justify-center"
-                >
-                    <div className="relative inline-flex items-center w-full max-w-lg rounded-xl bg-[#020617] border border-white/[0.08]"
-                        style={{ boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.4)' }}
-                    >
-                        <div className="flex items-center gap-3 px-5 py-4 w-full">
-                            <span className="text-neon-cyan/70 text-xs sm:text-sm font-mono font-bold select-none">$</span>
-                            <code className="text-xs sm:text-sm font-mono text-white/55 flex-1 truncate">
-                                {COMMAND}
-                            </code>
-                            <button
-                                onClick={handleCopy}
-                                className="flex items-center justify-center w-8 h-8 rounded-lg
-                                    text-white/30 hover:text-white/70 hover:bg-white/[0.06]
-                                    transition-all duration-200 cursor-pointer shrink-0"
-                                title="Copy to clipboard"
-                            >
-                                {copied ? (
-                                    <Check className="w-4 h-4 text-green-400" />
-                                ) : (
-                                    <Copy className="w-4 h-4" />
-                                )}
-                            </button>
-                        </div>
-                    </div>
-                </motion.div>
             </div>
         </section>
     )

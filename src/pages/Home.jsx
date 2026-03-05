@@ -7,6 +7,7 @@ import Stats from '../components/Stats'
 import InstallCTA from '../components/InstallCTA'
 import Footer from '../components/Footer'
 import PersistentBackground from '../components/PersistentBackground'
+import FloatingBadges from '../components/FloatingBadges'
 
 function GlowOrb({ color = 'cyan', position = 'left', top = '0px' }) {
     const colors = {
@@ -61,6 +62,8 @@ export default function Home() {
                 <InstallCTA />
                 <Footer />
             </div>
+
+            <FloatingBadges />
         </main>
     )
 }
