@@ -81,7 +81,7 @@ export default function Features() {
     const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
     return (
-        <section ref={sectionRef} id="features" className="relative min-h-screen flex flex-col justify-center py-24 sm:py-32 scroll-mt-20 overflow-hidden">
+        <section ref={sectionRef} id="features" className="relative min-h-screen flex flex-col justify-center py-16 sm:py-20 scroll-mt-20 overflow-hidden">
             {/* Ambient glow */}
             <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-neon-purple/[0.04] rounded-full blur-[150px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-neon-blue/[0.04] rounded-full blur-[120px] pointer-events-none" />
@@ -91,7 +91,7 @@ export default function Features() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8 }}
-                    className="text-center mb-16"
+                    className="text-center mb-10"
                 >
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                         <span className="gradient-text">Powerful Features</span>
@@ -106,21 +106,21 @@ export default function Features() {
                     variants={containerVariants}
                     initial="hidden"
                     animate={isInView ? 'visible' : 'hidden'}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
                 >
                     {features.map((feature, index) => (
                         <motion.div
                             key={index}
                             variants={cardVariants}
-                            className={`group glass-card rounded-2xl p-6 sm:p-8 transition-all duration-500 hover:scale-[1.02] ${feature.glowColor}`}
+                            className={`group glass-card rounded-2xl p-5 sm:p-6 transition-all duration-500 hover:scale-[1.02] ${feature.glowColor}`}
                         >
                             {/* Icon */}
-                            <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110`}>
+                            <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
                                 <feature.icon className={`w-6 h-6 ${feature.iconColor}`} />
                             </div>
 
                             {/* Title */}
-                            <h3 className="text-lg font-semibold text-white mb-3 group-hover:text-white/95 transition-colors">
+                            <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-white/95 transition-colors">
                                 {feature.title}
                             </h3>
 
@@ -130,7 +130,7 @@ export default function Features() {
                             </p>
 
                             {/* Bottom line */}
-                            <div className="mt-6 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            <div className="mt-4 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         </motion.div>
                     ))}
                 </motion.div>

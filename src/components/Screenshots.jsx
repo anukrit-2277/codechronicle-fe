@@ -197,7 +197,7 @@ export default function Screenshots() {
     const next = () => setCurrent((c) => (c === screenshots.length - 1 ? 0 : c + 1))
 
     return (
-        <section ref={sectionRef} id="screenshots" className="relative min-h-screen flex flex-col justify-center py-24 sm:py-32 scroll-mt-20 overflow-hidden">
+        <section ref={sectionRef} id="screenshots" className="relative min-h-screen flex flex-col justify-center py-14 sm:py-16 scroll-mt-20 overflow-hidden">
             {/* Ambient glow */}
             <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-neon-blue/[0.05] rounded-full blur-[150px] pointer-events-none" />
             <div className="absolute bottom-0 right-1/3 w-[400px] h-[400px] bg-neon-cyan/[0.04] rounded-full blur-[120px] pointer-events-none" />
@@ -207,7 +207,7 @@ export default function Screenshots() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8 }}
-                    className="text-center mb-16"
+                    className="text-center mb-8"
                 >
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                         <span className="gradient-text">Inside Your Editor</span>
@@ -237,13 +237,13 @@ export default function Screenshots() {
                     </AnimatePresence>
 
                     {/* Caption */}
-                    <div className="text-center mt-6">
+                    <div className="text-center mt-4">
                         <h3 className="text-lg font-semibold text-white mb-1">{screenshots[current].title}</h3>
                         <p className="text-sm text-white/40">{screenshots[current].description}</p>
                     </div>
 
                     {/* Controls */}
-                    <div className="flex items-center justify-center gap-4 mt-8">
+                    <div className="flex items-center justify-center gap-4 mt-4">
                         <button
                             onClick={prev}
                             className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-white/20 transition-all"
