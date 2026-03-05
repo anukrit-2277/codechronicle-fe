@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import {
     GitBranch,
     Target,
@@ -17,6 +17,7 @@ const features = [
         color: 'from-neon-cyan/20 to-neon-cyan/5',
         iconColor: 'text-neon-cyan',
         glowColor: 'group-hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]',
+        breathe: 'glow-breathe-cyan',
     },
     {
         icon: Target,
@@ -25,6 +26,7 @@ const features = [
         color: 'from-neon-purple/20 to-neon-purple/5',
         iconColor: 'text-neon-purple',
         glowColor: 'group-hover:shadow-[0_0_30px_rgba(167,139,250,0.15)]',
+        breathe: 'glow-breathe-purple',
     },
     {
         icon: FileText,
@@ -33,6 +35,7 @@ const features = [
         color: 'from-neon-blue/20 to-neon-blue/5',
         iconColor: 'text-neon-blue',
         glowColor: 'group-hover:shadow-[0_0_30px_rgba(96,165,250,0.15)]',
+        breathe: 'glow-breathe-blue',
     },
     {
         icon: Shield,
@@ -41,6 +44,7 @@ const features = [
         color: 'from-neon-cyan/20 to-neon-cyan/5',
         iconColor: 'text-neon-cyan',
         glowColor: 'group-hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]',
+        breathe: 'glow-breathe-cyan',
     },
     {
         icon: MessageSquare,
@@ -49,6 +53,7 @@ const features = [
         color: 'from-neon-purple/20 to-neon-purple/5',
         iconColor: 'text-neon-purple',
         glowColor: 'group-hover:shadow-[0_0_30px_rgba(167,139,250,0.15)]',
+        breathe: 'glow-breathe-purple',
     },
     {
         icon: Activity,
@@ -57,22 +62,63 @@ const features = [
         color: 'from-neon-blue/20 to-neon-blue/5',
         iconColor: 'text-neon-blue',
         glowColor: 'group-hover:shadow-[0_0_30px_rgba(96,165,250,0.15)]',
+        breathe: 'glow-breathe-blue',
     },
 ]
+
+function Tilt3DCard({ children, className, breatheAnim }) {
+    const ref = useRef(null)
+    const x = useMotionValue(0)
+    const y = useMotionValue(0)
+
+    const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 })
+    const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 })
+
+    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [8, -8])
+    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-8, 8])
+
+    const handleMouse = (e) => {
+        if (!ref.current) return
+        const rect = ref.current.getBoundingClientRect()
+        x.set((e.clientX - rect.left) / rect.width - 0.5)
+        y.set((e.clientY - rect.top) / rect.height - 0.5)
+    }
+
+    return (
+        <div style={{ perspective: 800 }}>
+            <motion.div
+                ref={ref}
+                onMouseMove={handleMouse}
+                onMouseLeave={() => { x.set(0); y.set(0) }}
+                style={{
+                    rotateX,
+                    rotateY,
+                    transformStyle: 'preserve-3d',
+                }}
+                className={className}
+            >
+                <div style={{ transform: 'translateZ(20px)', transformStyle: 'preserve-3d' }}>
+                    {children}
+                </div>
+            </motion.div>
+        </div>
+    )
+}
 
 const containerVariants = {
     hidden: {},
     visible: {
-        transition: { staggerChildren: 0.1 },
+        transition: { staggerChildren: 0.12 },
     },
 }
 
 const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 40, scale: 0.95 },
     visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.6, ease: 'easeOut' },
+        scale: 1,
+        transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
     },
 }
 
@@ -109,28 +155,33 @@ export default function Features() {
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
                 >
                     {features.map((feature, index) => (
-                        <motion.div
-                            key={index}
-                            variants={cardVariants}
-                            className={`group glass-card rounded-2xl p-5 sm:p-6 transition-all duration-500 hover:scale-[1.02] ${feature.glowColor}`}
-                        >
-                            {/* Icon */}
-                            <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
-                                <feature.icon className={`w-6 h-6 ${feature.iconColor}`} />
-                            </div>
+                        <motion.div key={index} variants={cardVariants}>
+                            <Tilt3DCard
+                                className={`group glass-card rounded-2xl p-5 sm:p-6 transition-all duration-500 hover:scale-[1.02] ${feature.glowColor}`}
+                                breatheAnim={feature.breathe}
+                            >
+                                {/* Icon with glow pulse */}
+                                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3`}
+                                    style={{ transform: 'translateZ(10px)' }}
+                                >
+                                    <feature.icon className={`w-6 h-6 ${feature.iconColor} transition-all duration-300`} />
+                                </div>
 
-                            {/* Title */}
-                            <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-white/95 transition-colors">
-                                {feature.title}
-                            </h3>
+                                {/* Title */}
+                                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-white/95 transition-colors"
+                                    style={{ transform: 'translateZ(5px)' }}
+                                >
+                                    {feature.title}
+                                </h3>
 
-                            {/* Description */}
-                            <p className="text-white/50 text-sm leading-relaxed group-hover:text-white/60 transition-colors">
-                                {feature.description}
-                            </p>
+                                {/* Description */}
+                                <p className="text-white/50 text-sm leading-relaxed group-hover:text-white/60 transition-colors">
+                                    {feature.description}
+                                </p>
 
-                            {/* Bottom line */}
-                            <div className="mt-4 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                {/* Bottom glow line */}
+                                <div className="mt-4 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            </Tilt3DCard>
                         </motion.div>
                     ))}
                 </motion.div>

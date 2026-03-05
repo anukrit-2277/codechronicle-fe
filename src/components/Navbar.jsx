@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, FileText } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 const navLinks = [
     { label: 'Architecture', href: '#graph-demo' },
@@ -19,7 +19,6 @@ export default function Navbar() {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50)
 
-            // Determine active section
             const sections = navLinks.map(l => l.href.replace('#', ''))
             let current = ''
             for (const id of sections) {
@@ -53,32 +52,36 @@ export default function Navbar() {
     return (
         <>
             <motion.nav
-                initial={{ y: -100 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
                     ? 'bg-[#020617]/80 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
                     : 'bg-transparent'
                     }`}
             >
                 <div className="max-w-6xl mx-auto px-6">
                     <div className="flex items-center justify-between h-24">
-                        {/* Logo */}
-                        <a
+                        {/* Logo with hover effect */}
+                        <motion.a
                             href="#hero"
                             onClick={(e) => handleClick(e, { href: '#hero' })}
                             className="flex items-center gap-2.5 group"
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                         >
-                            <img
-                                src="/logo1.png"
+                            <motion.img
+                                src="/logo2.png"
                                 alt="CodeChronicle"
-                                className="w-8 h-8 object-contain"
+                                className="w-11 h-11 object-contain"
                                 style={{ mixBlendMode: 'screen' }}
+                                whileHover={{ rotate: 360 }}
+                                transition={{ duration: 0.6, ease: 'easeInOut' }}
                             />
                             <span className="text-base font-semibold text-white/90 group-hover:text-white transition-colors tracking-tight">
                                 CodeChronicle
                             </span>
-                        </a>
+                        </motion.a>
 
                         {/* Desktop Nav */}
                         <div className="hidden md:flex items-center gap-0.5">
@@ -109,24 +112,38 @@ export default function Navbar() {
 
                         {/* Install CTA */}
                         <div className="hidden md:block">
-                            <a
+                            <motion.a
                                 href="vscode:extension/AnujKamalJain.codechronicle"
-                                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium
+                                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium relative overflow-hidden
                                     bg-gradient-to-r from-neon-cyan to-neon-blue text-dark-900
-                                    hover:shadow-[0_0_20px_rgba(34,211,238,0.25)] hover:scale-105
+                                    hover:shadow-[0_0_20px_rgba(34,211,238,0.25)]
                                     transition-all duration-300"
+                                whileHover={{ scale: 1.05, y: -1 }}
+                                whileTap={{ scale: 0.97 }}
+                                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                             >
                                 Install
-                            </a>
+                            </motion.a>
                         </div>
 
                         {/* Mobile hamburger */}
-                        <button
+                        <motion.button
                             onClick={() => setMobileOpen(!mobileOpen)}
                             className="md:hidden p-2 text-white/60 hover:text-white transition-colors"
+                            whileTap={{ scale: 0.9 }}
                         >
-                            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-                        </button>
+                            <AnimatePresence mode="wait">
+                                {mobileOpen ? (
+                                    <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                                        <X className="w-5 h-5" />
+                                    </motion.div>
+                                ) : (
+                                    <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                                        <Menu className="w-5 h-5" />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </motion.button>
                     </div>
                 </div>
             </motion.nav>
@@ -135,36 +152,42 @@ export default function Navbar() {
             <AnimatePresence>
                 {mobileOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="fixed inset-x-0 top-24 z-40 bg-[#020617]/95 backdrop-blur-xl border-b border-white/[0.06] md:hidden"
+                        initial={{ opacity: 0, y: -20, backdropFilter: 'blur(0px)' }}
+                        animate={{ opacity: 1, y: 0, backdropFilter: 'blur(20px)' }}
+                        exit={{ opacity: 0, y: -20, backdropFilter: 'blur(0px)' }}
+                        transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                        className="fixed inset-x-0 top-24 z-40 bg-[#020617]/95 border-b border-white/[0.06] md:hidden"
                     >
                         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
-                            {navLinks.map((link) => {
+                            {navLinks.map((link, i) => {
                                 const isActive = activeSection === link.href.replace('#', '')
                                 return (
-                                    <a
+                                    <motion.a
                                         key={link.href}
                                         href={link.href}
                                         onClick={(e) => handleClick(e, link)}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ duration: 0.3, delay: i * 0.05 }}
                                         className={`px-4 py-3 rounded-lg text-sm font-medium transition-all ${isActive
                                             ? 'text-neon-cyan bg-neon-cyan/[0.08] border border-neon-cyan/20'
                                             : 'text-white/50 hover:text-white/80 hover:bg-white/[0.03]'
                                             }`}
                                     >
                                         {link.label}
-                                    </a>
+                                    </motion.a>
                                 )
                             })}
-                            <a
+                            <motion.a
                                 href="vscode:extension/AnujKamalJain.codechronicle"
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.3, delay: navLinks.length * 0.05 }}
                                 className="mt-2 text-center px-4 py-3 rounded-lg text-sm font-medium
                                     bg-gradient-to-r from-neon-cyan to-neon-blue text-dark-900"
                             >
                                 Install Extension
-                            </a>
+                            </motion.a>
                         </div>
                     </motion.div>
                 )}

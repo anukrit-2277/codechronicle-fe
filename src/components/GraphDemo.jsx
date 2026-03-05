@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const graphNodes = [
@@ -55,12 +55,13 @@ export default function GraphDemo() {
 
                 {/* Graph Container */}
                 <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8, delay: 0.2 }}
+                    initial={{ opacity: 0, y: 40, scale: 0.96 }}
+                    animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                    transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
                     className="relative"
+                    style={{ perspective: 1200 }}
                 >
-                    <div className="glass-card rounded-2xl overflow-hidden glow-cyan p-2">
+                    <div className="glass-card rounded-2xl overflow-hidden glow-cyan p-2" style={{ animation: 'glow-breathe-cyan 4s ease-in-out infinite' }}>
                         {/* Title bar */}
                         <div className="flex items-center gap-2 px-4 py-2 border-b border-white/5 mb-2">
                             <div className="flex gap-1.5">

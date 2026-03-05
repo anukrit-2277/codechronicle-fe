@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { Github, FileText } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -7,50 +9,78 @@ const links = [
 ]
 
 export default function Footer() {
+    const footerRef = useRef(null)
+    const isInView = useInView(footerRef, { once: true, margin: '-50px' })
+
     return (
-        <footer className="relative border-t border-white/5">
+        <footer ref={footerRef} className="relative">
+            {/* Animated gradient border */}
+            <div className="glow-divider" />
+            <div className="border-t border-white/5" />
+
             <div className="max-w-6xl mx-auto px-6 py-12">
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-8">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.7, ease: 'easeOut' }}
+                    className="flex flex-col sm:flex-row items-center justify-between gap-8"
+                >
                     {/* Logo */}
-                    <div className="flex items-center gap-3">
+                    <motion.div
+                        className="flex items-center gap-3"
+                        whileHover={{ scale: 1.03 }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                    >
                         <img src="/logo1.png" alt="CodeChronicle" className="w-9 h-9 object-contain brightness-110" style={{ mixBlendMode: 'screen' }} />
                         <span className="text-lg font-semibold text-white/80">CodeChronicle</span>
-                    </div>
+                    </motion.div>
 
                     {/* Links */}
                     <div className="flex flex-wrap items-center justify-center gap-6">
                         {links.map((link, i) =>
                             link.external ? (
-                                <a
+                                <motion.a
                                     key={i}
                                     href={link.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors"
+                                    whileHover={{ y: -2 }}
+                                    transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                                 >
                                     <link.icon className="w-4 h-4" />
                                     {link.label}
-                                </a>
+                                </motion.a>
                             ) : (
-                                <Link
+                                <motion.div
                                     key={i}
-                                    to={link.to}
-                                    className="flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors"
+                                    whileHover={{ y: -2 }}
+                                    transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                                 >
-                                    <link.icon className="w-4 h-4" />
-                                    {link.label}
-                                </Link>
+                                    <Link
+                                        to={link.to}
+                                        className="flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors"
+                                    >
+                                        <link.icon className="w-4 h-4" />
+                                        {link.label}
+                                    </Link>
+                                </motion.div>
                             )
                         )}
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Bottom */}
-                <div className="mt-8 pt-8 border-t border-white/5 text-center">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : {}}
+                    transition={{ duration: 0.7, delay: 0.2 }}
+                    className="mt-8 pt-8 border-t border-white/5 text-center"
+                >
                     <p className="text-xs text-white/25">
                         © {new Date().getFullYear()} CodeChronicle. Built for developers.
                     </p>
-                </div>
+                </motion.div>
             </div>
         </footer>
     )
