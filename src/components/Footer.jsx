@@ -48,7 +48,7 @@ export default function Footer() {
                 {/* Bottom */}
                 <div className="mt-8 pt-8 border-t border-white/5 text-center">
                     <p className="text-xs text-white/25">
-                        © {new Date().getFullYear()} CodeChronicle. Built with ❤️ for developers.
+                        © {new Date().getFullYear()} CodeChronicle. Built for developers.
                     </p>
                 </div>
             </div>
