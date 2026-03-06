@@ -71,13 +71,3 @@ AWS Lambda automatically captures all `console.log`, `console.warn`, and `consol
 | `aiHandler.js` | Cache hits for summaries, generated summary results, errors during AI explanation generation |
 | `riskEngine.js` | Cache hits for risk analysis, risk assessment results, risk assessment errors |
 | `cacheService.js` | Cache writes for summaries and risk scores, cache read/write errors |
-
-### How to View Logs
-
-1. Open the **AWS Console**
-2. Navigate to **CloudWatch**
-3. Go to **Log Groups** in the left sidebar
-4. Select the Lambda function log group (e.g., `/aws/lambda/codechronicle-backend-{stage}-aiExplain`)
-5. Click on a **Log Stream** to view logs for each invocation
-
-> **Note:** Each Lambda function creates its own log group automatically. Log streams are organized by invocation, making it easy to trace individual requests.
