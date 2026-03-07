@@ -184,7 +184,7 @@ export default function Docs() {
                                     Built with deterministic analysis and AI reasoning.
                                 </p>
                                 <p className="text-white/45 font-semibold mt-2 text-sm">
-                                    CodeChronicle — Understand your code before you change it.
+                                    CodeChronicle -Understand your code before you change it.
                                 </p>
                                 <a
                                     href="https://marketplace.visualstudio.com/items?itemName=AnujKamalJain.codechronicle"

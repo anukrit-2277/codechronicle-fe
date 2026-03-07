@@ -60,7 +60,7 @@ function MockScreenshot({ screenshot, index, onTabClick }) {
                         <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
                         <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
                     </div>
-                    <span className="text-xs text-white/30 font-mono ml-2">CodeChronicle — {screenshot.tab}</span>
+                    <span className="text-xs text-white/30 font-mono ml-2">CodeChronicle -{screenshot.tab}</span>
                 </div>
 
                 {/* Content */}
@@ -169,10 +169,10 @@ function MockScreenshot({ screenshot, index, onTabClick }) {
                                 </div>
                                 <div className="bg-dark-900/80 rounded-lg p-3 text-xs font-mono text-white/50 space-y-2">
                                     <p className="text-neon-cyan/80">Found 4 files related to authentication:</p>
-                                    <p>1. <span className="text-white/70">auth/login.ts</span> — Main login handler</p>
-                                    <p>2. <span className="text-white/70">auth/session.ts</span> — Session management</p>
-                                    <p>3. <span className="text-white/70">middleware/auth.ts</span> — Auth middleware</p>
-                                    <p>4. <span className="text-white/70">utils/token.ts</span> — JWT utilities</p>
+                                    <p>1. <span className="text-white/70">auth/login.ts</span> -Main login handler</p>
+                                    <p>2. <span className="text-white/70">auth/session.ts</span> -Session management</p>
+                                    <p>3. <span className="text-white/70">middleware/auth.ts</span> -Auth middleware</p>
+                                    <p>4. <span className="text-white/70">utils/token.ts</span> -JWT utilities</p>
                                 </div>
                             </div>
                         </div>
@@ -208,7 +208,7 @@ function MockScreenshot({ screenshot, index, onTabClick }) {
                                     )
                                 })}
                             </div>
-                            <div className="text-[10px] font-mono text-white/30 text-center">Complexity trend — last 30 days</div>
+                            <div className="text-[10px] font-mono text-white/30 text-center">Complexity trend -last 30 days</div>
                         </div>
                     )}
                 </div>
@@ -255,7 +255,7 @@ export default function Screenshots() {
                         <span className="gradient-text">Inside Your Editor</span>
                     </h2>
                     <p className="text-lg text-white/50 max-w-2xl mx-auto">
-                        Powerful insights without leaving VS Code — graphs, blast radius, AI queries, and risk dashboards.
+                        Powerful insights without leaving VS Code -graphs, blast radius, AI queries, and risk dashboards.
                     </p>
                 </motion.div>
 

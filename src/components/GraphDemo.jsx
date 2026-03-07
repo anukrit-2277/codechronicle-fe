@@ -69,7 +69,7 @@ export default function GraphDemo() {
                                 <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
                                 <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
                             </div>
-                            <span className="text-xs text-white/30 font-mono ml-2">codechronicle — graph explorer</span>
+                            <span className="text-xs text-white/30 font-mono ml-2">codechronicle -graph explorer</span>
                         </div>
 
                         <div className="relative bg-dark-900/60 rounded-xl" style={{ height: 'min(500px, 50vh)' }}>

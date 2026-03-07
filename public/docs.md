@@ -123,7 +123,7 @@ Five Lambda functions handle all backend logic, deployed via the Serverless Fram
 | `codechronicle-backend-summaries-{stage}` | Cached AI file summaries | `fileHash` (HASH) + `filePath` (RANGE) | 7 days |
 | `codechronicle-backend-risks-{stage}` | Cached AI risk assessments | `fileHash` (HASH) + `filePath` (RANGE) | 7 days |
 
-**Billing:** PAY_PER_REQUEST (on-demand) — you only pay for what you use.
+**Billing:** PAY_PER_REQUEST (on-demand) -you only pay for what you use.
 
 ---
 
@@ -157,7 +157,7 @@ The **GraphBuilder** constructs a directed graph where nodes = source files and 
 | **Lines of Code (LOC)** | Total line count of the file |
 | **Dependency Count** | Number of files this file imports (out-degree) |
 | **Dependent Count** | Number of files that import this file (in-degree) |
-| **Centrality Score** | Betweenness centrality — how critical as a connector (0.0–1.0) |
+| **Centrality Score** | Betweenness centrality -how critical as a connector (0.0–1.0) |
 | **Structural Risk Score** | Composite risk from deps, dependents, centrality, LOC (0–100) |
 
 ### 4. Interactive Graph Visualization
@@ -223,8 +223,8 @@ Provides codebase-wide health overview: health score gauge (0–100), risk distr
 |-----------|------|-----|-------------|
 | `fileHash` | String | Partition Key | MD5 hash of file content |
 | `filePath` | String | Sort Key | Workspace-relative file path |
-| `summary` | String | — | AI-generated file summary |
-| `timestamp` | String | — | ISO 8601 timestamp |
+| `summary` | String | -| AI-generated file summary |
+| `timestamp` | String | -| ISO 8601 timestamp |
 | `ttl` | Number | TTL | Unix epoch expiration (7 days) |
 
 ### Risks Table
@@ -233,8 +233,8 @@ Provides codebase-wide health overview: health score gauge (0–100), risk distr
 |-----------|------|-----|-------------|
 | `fileHash` | String | Partition Key | MD5 hash of file content |
 | `filePath` | String | Sort Key | Workspace-relative file path |
-| `riskFactor` | Map | — | `{ level, score, explanation, factors }` |
-| `timestamp` | String | — | ISO 8601 timestamp |
+| `riskFactor` | Map | -| `{ level, score, explanation, factors }` |
+| `timestamp` | String | -| ISO 8601 timestamp |
 | `ttl` | Number | TTL | Unix epoch expiration (7 days) |
 
 ---
@@ -377,7 +377,7 @@ npm run dev
 ### Prerequisites
 
 1. **AWS Account** with Amazon Bedrock access enabled
-2. **Amazon Nova model access** — Request access in the Bedrock console
+2. **Amazon Nova model access** -Request access in the Bedrock console
 3. **AWS CLI** configured (`aws configure`)
 4. **Node.js 20+**
 5. **Serverless Framework** v3 (`npm install -g serverless`)
@@ -450,6 +450,6 @@ CodeChronicle uses a **dark glassmorphism design system** with neon accents, bui
 
 <p align="center">
   Built with deterministic analysis and AI reasoning.<br/>
-  <strong>CodeChronicle</strong> — Understand your code before you change it.<br/><br/>
+  <strong>CodeChronicle</strong> -Understand your code before you change it.<br/><br/>
   <a href="https://marketplace.visualstudio.com/items?itemName=AnujKamalJain.codechronicle">Install from VS Code Marketplace</a>
 </p>

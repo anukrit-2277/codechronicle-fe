@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 export default function FloatingBadges() {
     return (
         <>
-            {/* Kiro — bottom-left */}
+            {/* Kiro -bottom-left */}
             <motion.a
                 href="https://kiro.dev"
                 target="_blank"
@@ -29,7 +29,7 @@ export default function FloatingBadges() {
                 <span style={{ fontSize: 14, fontWeight: 500, color: '#e5e7eb' }}>Made with Kiro</span>
             </motion.a>
 
-            {/* AWS — bottom-right */}
+            {/* AWS -bottom-right */}
             <motion.a
                 href="https://aws.amazon.com"
                 target="_blank"

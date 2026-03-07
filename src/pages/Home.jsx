@@ -38,7 +38,7 @@ export default function Home() {
             {/* Navbar */}
             <Navbar />
 
-            {/* 3D animated background — fixed across entire page */}
+            {/* 3D animated background -fixed across entire page */}
             <ThreeGraphBackground />
 
             {/* Persistent particle background */}

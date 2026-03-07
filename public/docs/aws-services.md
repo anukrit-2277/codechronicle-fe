@@ -42,11 +42,11 @@ Five Lambda functions handle all backend logic, deployed via the Serverless Fram
 | `codechronicle-backend-summaries-{stage}` | Cached AI file summaries | `fileHash` (HASH) + `filePath` (RANGE) | 7 days |
 | `codechronicle-backend-risks-{stage}` | Cached AI risk assessments | `fileHash` (HASH) + `filePath` (RANGE) | 7 days |
 
-**Billing:** PAY_PER_REQUEST (on-demand) — you only pay for what you use.
+**Billing:** PAY_PER_REQUEST (on-demand) -you only pay for what you use.
 
 ## <img src="/aws-cloud-watch.png" alt="CloudWatch" style="height:28px;vertical-align:middle;margin-right:8px;" /> AWS CloudWatch (Logging & Monitoring)
 
-The backend uses **AWS CloudWatch Logs** for centralized logging across all Lambda functions. **No additional SDK or logging library is required** — AWS Lambda automatically integrates with CloudWatch by default.
+The backend uses **AWS CloudWatch Logs** for centralized logging across all Lambda functions. **No additional SDK or logging library is required** -AWS Lambda automatically integrates with CloudWatch by default.
 
 ### IAM Permissions
 

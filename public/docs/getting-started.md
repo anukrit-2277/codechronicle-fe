@@ -27,7 +27,7 @@ npm run dev
 ### Prerequisites
 
 1. **AWS Account** with Amazon Bedrock access enabled
-2. **Amazon Nova model access** — Request access in the Bedrock console
+2. **Amazon Nova model access** -Request access in the Bedrock console
 3. **AWS CLI** configured (`aws configure`)
 4. **Node.js 20+**
 5. **Serverless Framework** v3 (`npm install -g serverless`)

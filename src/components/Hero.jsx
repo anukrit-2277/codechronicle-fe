@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
-import { ArrowRight, Github } from 'lucide-react'
+import { ArrowRight, Github, Users, Zap } from 'lucide-react'
 
 const floatingShapes = [
     { x: '8%', y: '22%', size: 60, delay: 0, duration: 20 },
@@ -71,13 +71,20 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
                     className="mb-8"
                 >
-                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm">
+                    <span
+                        className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full backdrop-blur-md"
+                        style={{
+                            background: 'linear-gradient(135deg, rgba(34, 211, 238, 0.08), rgba(167, 139, 250, 0.06), rgba(96, 165, 250, 0.08))',
+                            border: '1px solid rgba(34, 211, 238, 0.15)',
+                            boxShadow: '0 0 20px rgba(34, 211, 238, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+                        }}
+                    >
                         <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-cyan opacity-75" />
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-neon-cyan" />
                         </span>
-                        <span className="text-xs font-medium text-white/50 tracking-wide uppercase">
-                            AI-Powered VS Code Extension
+                        <span className="text-xs font-semibold tracking-wider uppercase" style={{ color: 'rgba(34, 211, 238, 0.8)' }}>
+                            Available on VS Code, Kiro & Other IDE's
                         </span>
                     </span>
                 </motion.div>
@@ -95,28 +102,99 @@ export default function Hero() {
                         initial={{ opacity: 0, y: 15 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
-                        className="text-lg sm:text-xl md:text-3xl text-white/70 font-light mb-4 max-w-3xl mx-auto"
+                        className="text-lg sm:text-xl md:text-3xl text-white/70 font-light mb-6 max-w-3xl mx-auto"
                     >
                         Understand Your Codebase Instantly
                     </motion.p>
                 </motion.div>
 
-                {/* Subtitle */}
-                <motion.p
+                {/* Social proof + subtitle */}
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8, delay: 1.0 }}
-                    className="text-sm sm:text-base md:text-lg text-white/50 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2"
+                    className="max-w-2xl mx-auto mb-8 sm:mb-10 space-y-5"
                 >
-                    AI-Powered Dependency Graphs, Blast Radius Prediction, and Natural Language
-                    Code Exploration — directly inside VS Code.
-                </motion.p>
+                    <p className="text-sm sm:text-base md:text-lg text-white/50 leading-relaxed px-2">
+                        AI-Powered Dependency Graphs, Blast Radius Prediction, and Natural Language
+                        Code Exploration -built for modern IDEs.
+                    </p>
+
+                    {/* IDE & Adoption strip */}
+                    <div className="flex flex-nowrap items-center justify-center gap-2 sm:gap-3">
+                        {/* Developer count pill */}
+                        <span
+                            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full backdrop-blur-sm whitespace-nowrap"
+                            style={{
+                                background: 'rgba(255, 255, 255, 0.04)',
+                                border: '1px solid rgba(255, 255, 255, 0.08)',
+                            }}
+                        >
+                            <Users className="w-3.5 h-3.5 text-neon-cyan" />
+                            <span className="text-xs sm:text-sm font-semibold text-white/60">
+                                Trusted by 500+ Developers
+                            </span>
+                        </span>
+
+                        {/* Separator dot */}
+                        <span className="hidden sm:block w-1 h-1 rounded-full bg-white/20" />
+
+                        {/* VS Code pill */}
+                        <span
+                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full backdrop-blur-sm whitespace-nowrap"
+                            style={{
+                                background: 'rgba(96, 165, 250, 0.06)',
+                                border: '1px solid rgba(96, 165, 250, 0.12)',
+                            }}
+                        >
+                            <span className="w-1.5 h-1.5 rounded-full bg-neon-blue" />
+                            <span className="text-xs font-medium text-neon-blue/80">VS Code</span>
+                        </span>
+
+                        {/* Kiro pill */}
+                        <span
+                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full backdrop-blur-sm whitespace-nowrap"
+                            style={{
+                                background: 'rgba(34, 211, 238, 0.06)',
+                                border: '1px solid rgba(34, 211, 238, 0.12)',
+                            }}
+                        >
+                            <span className="w-1.5 h-1.5 rounded-full bg-neon-cyan" />
+                            <span className="text-xs font-medium text-neon-cyan/80">Kiro</span>
+                        </span>
+
+                        {/* Anti-Gravity pill */}
+                        <span
+                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full backdrop-blur-sm whitespace-nowrap"
+                            style={{
+                                background: 'rgba(167, 139, 250, 0.06)',
+                                border: '1px solid rgba(167, 139, 250, 0.12)',
+                            }}
+                        >
+                            <span className="w-1.5 h-1.5 rounded-full bg-neon-purple" />
+                            <span className="text-xs font-medium text-neon-purple/80">Antigravity</span>
+                        </span>
+
+                        {/* Cursor pill (coming soon) */}
+                        <span
+                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full backdrop-blur-sm whitespace-nowrap"
+                            style={{
+                                background: 'rgba(251, 191, 36, 0.05)',
+                                border: '1px dashed rgba(251, 191, 36, 0.2)',
+                            }}
+                        >
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400/70" />
+                            <span className="text-xs font-medium text-amber-400/60">Cursor</span>
+                            <span className="text-[10px] font-medium text-amber-400/40 uppercase tracking-wider">Soon</span>
+                        </span>
+                    </div>
+                </motion.div>
 
                 {/* CTAs */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8, delay: 1.2 }}
+                    transition={{ duration: 0.8, delay: 1.3 }}
                     className="flex flex-col sm:flex-row gap-4 justify-center items-center"
                 >
                     <a

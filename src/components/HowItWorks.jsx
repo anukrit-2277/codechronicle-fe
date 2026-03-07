@@ -7,7 +7,7 @@ const steps = [
         step: '01',
         icon: FolderOpen,
         title: 'Open your project in VS Code',
-        description: 'Open any project — TypeScript, Python, Go, Rust, or 15+ other languages.',
+        description: 'Open any project -TypeScript, Python, Go, Rust, or 15+ other languages.',
         iconBg: 'bg-neon-cyan/10',
         iconBorder: 'border-neon-cyan/20',
         iconColor: 'text-neon-cyan',

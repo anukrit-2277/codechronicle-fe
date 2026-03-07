@@ -20,8 +20,8 @@
 |-----------|------|-----|-------------|
 | `fileHash` | String | Partition Key | MD5 hash of file content |
 | `filePath` | String | Sort Key | Workspace-relative file path |
-| `summary` | String | — | AI-generated file summary |
-| `timestamp` | String | — | ISO 8601 timestamp |
+| `summary` | String | -| AI-generated file summary |
+| `timestamp` | String | -| ISO 8601 timestamp |
 | `ttl` | Number | TTL | Unix epoch expiration (7 days) |
 
 ### Risks Table
@@ -30,6 +30,6 @@
 |-----------|------|-----|-------------|
 | `fileHash` | String | Partition Key | MD5 hash of file content |
 | `filePath` | String | Sort Key | Workspace-relative file path |
-| `riskFactor` | Map | — | `{ level, score, explanation, factors }` |
-| `timestamp` | String | — | ISO 8601 timestamp |
+| `riskFactor` | Map | -| `{ level, score, explanation, factors }` |
+| `timestamp` | String | -| ISO 8601 timestamp |
 | `ttl` | Number | TTL | Unix epoch expiration (7 days) |

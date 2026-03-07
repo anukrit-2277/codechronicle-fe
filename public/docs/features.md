@@ -28,7 +28,7 @@ The **GraphBuilder** constructs a directed graph where nodes = source files and 
 | **Lines of Code (LOC)** | Total line count of the file |
 | **Dependency Count** | Number of files this file imports (out-degree) |
 | **Dependent Count** | Number of files that import this file (in-degree) |
-| **Centrality Score** | Betweenness centrality — how critical as a connector (0.0–1.0) |
+| **Centrality Score** | Betweenness centrality -how critical as a connector (0.0–1.0) |
 | **Structural Risk Score** | Composite risk from deps, dependents, centrality, LOC (0–100) |
 
 ## 4. Interactive Graph Visualization
