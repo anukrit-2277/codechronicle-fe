@@ -1,4 +1,5 @@
 import Hero from '../components/Hero'
+import InstallGuide from '../components/InstallGuide'
 import GraphDemo from '../components/GraphDemo'
 import Features from '../components/Features'
 import HowItWorks from '../components/HowItWorks'
@@ -60,6 +61,12 @@ export default function Home() {
                 <Hero />
 
                 {/* Glow divider between sections */}
+                <div className="max-w-4xl mx-auto px-6">
+                    <div className="glow-divider" />
+                </div>
+
+                <InstallGuide />
+
                 <div className="max-w-4xl mx-auto px-6">
                     <div className="glow-divider" />
                 </div>

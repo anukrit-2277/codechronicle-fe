@@ -121,7 +121,7 @@ export default function Hero() {
                     </p>
 
                     {/* IDE & Adoption strip */}
-                    <div className="flex flex-nowrap items-center justify-center gap-2 sm:gap-3">
+                    <div className="flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 sm:gap-3">
                         {/* Developer count pill */}
                         <span
                             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full backdrop-blur-sm whitespace-nowrap"
