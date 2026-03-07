@@ -243,16 +243,6 @@ export default function InstallGuide() {
                     <span className="text-lg font-semibold text-white/80">
                         Installing on Kiro
                     </span>
-                    <span
-                        className="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase"
-                        style={{
-                            background: 'rgba(34, 211, 238, 0.1)',
-                            border: '1px solid rgba(34, 211, 238, 0.2)',
-                            color: 'rgba(34, 211, 238, 0.8)',
-                        }}
-                    >
-                        Recommended
-                    </span>
                 </motion.div>
 
                 {/* Steps */}
