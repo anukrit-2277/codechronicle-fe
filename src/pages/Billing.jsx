@@ -270,7 +270,7 @@ export default function Billing() {
             </div>
           ) : null}
           {isRedeemOpen ? (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/65 p-4">
+            <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/65 p-4 pt-16 sm:pt-20 overflow-y-auto">
               <div className="w-full max-w-md rounded-2xl border border-neon-purple/30 bg-dark-900 shadow-2xl shadow-neon-purple/15">
                 <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
                   <h3 className="text-base font-semibold">Redeem Coupon Code</h3>
