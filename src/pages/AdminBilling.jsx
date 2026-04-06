@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { billingApi } from '../lib/api'
 import { useAuth } from '../lib/auth-context'
@@ -23,6 +23,13 @@ export default function AdminBilling() {
   const [couponMaxClaims, setCouponMaxClaims] = useState('100')
   const [couponBusy, setCouponBusy] = useState(false)
   const [couponMessage, setCouponMessage] = useState('')
+  const [coupons, setCoupons] = useState([])
+  const [couponListBusy, setCouponListBusy] = useState(false)
+  const [couponActionBusyByCode, setCouponActionBusyByCode] = useState({})
+  const [expiryDraftByCode, setExpiryDraftByCode] = useState({})
+  const [couponSearch, setCouponSearch] = useState('')
+  const [couponStatusFilter, setCouponStatusFilter] = useState('all')
+  const [couponClaimFilter, setCouponClaimFilter] = useState('all')
 
   useEffect(() => {
     if (!loading && !isAuthenticated) {
@@ -30,7 +37,7 @@ export default function AdminBilling() {
     }
   }, [loading, isAuthenticated, navigate])
 
-  async function loadSummary(mountedRef = { current: true }) {
+  const loadSummary = useCallback(async (mountedRef = { current: true }) => {
     try {
       const summary = await billingApi.getAdminSummary()
       if (!mountedRef.current) return
@@ -39,14 +46,38 @@ export default function AdminBilling() {
       if (!mountedRef.current) return
       setError(err.message || 'Unable to load admin billing summary.')
     }
-  }
+  }, [])
+
+  const loadCoupons = useCallback(async (mountedRef = { current: true }) => {
+    setCouponListBusy(true)
+    try {
+      const resp = await billingApi.listCoupons(200)
+      if (!mountedRef.current) return
+      const items = resp.items || []
+      setCoupons(items)
+      setExpiryDraftByCode((prev) => {
+        const next = { ...prev }
+        for (const coupon of items) {
+          if (next[coupon.couponCode] !== undefined) continue
+          next[coupon.couponCode] = coupon.expiresAt ? String(coupon.expiresAt).slice(0, 16) : ''
+        }
+        return next
+      })
+    } catch (err) {
+      if (!mountedRef.current) return
+      setError(err.message || 'Unable to load coupon list.')
+    } finally {
+      if (mountedRef.current) setCouponListBusy(false)
+    }
+  }, [])
 
   useEffect(() => {
     if (!isAuthenticated) return
     const mountedRef = { current: true }
     loadSummary(mountedRef)
+    loadCoupons(mountedRef)
     return () => { mountedRef.current = false }
-  }, [isAuthenticated])
+  }, [isAuthenticated, loadSummary, loadCoupons])
 
   async function handleCreateCoupon(e) {
     e.preventDefault()
@@ -61,6 +92,7 @@ export default function AdminBilling() {
         maxClaims: Number(couponMaxClaims || 1),
       })
       await loadSummary()
+      await loadCoupons()
       setCouponMessage(`Coupon ${resp.coupon?.couponCode || couponCode.toUpperCase()} created successfully.`)
       setCouponCode('')
     } catch (err) {
@@ -69,6 +101,68 @@ export default function AdminBilling() {
       setCouponBusy(false)
     }
   }
+
+  async function toggleCouponActive(couponCode, nextActive) {
+    setCouponActionBusyByCode((prev) => ({ ...prev, [couponCode]: true }))
+    setCouponMessage('')
+    setError('')
+    try {
+      await billingApi.updateCoupon({ code: couponCode, active: nextActive })
+      await loadCoupons()
+      setCouponMessage(`Coupon ${couponCode} ${nextActive ? 'enabled' : 'disabled'} successfully.`)
+    } catch (err) {
+      setCouponMessage(err.message || 'Unable to update coupon status.')
+    } finally {
+      setCouponActionBusyByCode((prev) => ({ ...prev, [couponCode]: false }))
+    }
+  }
+
+  async function updateCouponExpiry(couponCode) {
+    setCouponActionBusyByCode((prev) => ({ ...prev, [couponCode]: true }))
+    setCouponMessage('')
+    setError('')
+    try {
+      const draft = expiryDraftByCode[couponCode] || ''
+      await billingApi.updateCoupon({
+        code: couponCode,
+        expiresAt: draft ? new Date(draft).toISOString() : null,
+      })
+      await loadCoupons()
+      setCouponMessage(`Expiry updated for coupon ${couponCode}.`)
+    } catch (err) {
+      setCouponMessage(err.message || 'Unable to update coupon expiry.')
+    } finally {
+      setCouponActionBusyByCode((prev) => ({ ...prev, [couponCode]: false }))
+    }
+  }
+
+  const filteredCoupons = useMemo(() => {
+    const now = Date.now()
+    const q = couponSearch.trim().toUpperCase()
+
+    return coupons.filter((coupon) => {
+      const code = String(coupon.couponCode || '').toUpperCase()
+      const isActive = !!coupon.active
+      const expiresAtMs = coupon.expiresAt ? new Date(coupon.expiresAt).getTime() : null
+      const isExpired = Number.isFinite(expiresAtMs) && expiresAtMs < now
+      const claimed = Number(coupon.claimedCount || 0)
+      const maxClaims = Number(coupon.maxClaims || 0)
+      const isExhausted = maxClaims > 0 && claimed >= maxClaims
+
+      if (q && !code.includes(q)) return false
+
+      if (couponStatusFilter === 'active' && !isActive) return false
+      if (couponStatusFilter === 'disabled' && isActive) return false
+      if (couponStatusFilter === 'expired' && !isExpired) return false
+      if (couponStatusFilter === 'valid_now' && (!isActive || isExpired)) return false
+
+      if (couponClaimFilter === 'unclaimed' && claimed !== 0) return false
+      if (couponClaimFilter === 'claimed' && claimed === 0) return false
+      if (couponClaimFilter === 'exhausted' && !isExhausted) return false
+
+      return true
+    })
+  }, [coupons, couponSearch, couponStatusFilter, couponClaimFilter])
 
   if (loading || (!isAuthenticated && !error)) {
     return (
@@ -180,6 +274,125 @@ export default function AdminBilling() {
                   </button>
                 </div>
               </form>
+            </section>
+
+            <section className="mt-8 glass-card rounded-xl p-5">
+              <div className="flex items-center justify-between gap-2">
+                <h2 className="text-lg font-semibold">Coupon Controls</h2>
+                <button
+                  type="button"
+                  className="btn-secondary"
+                  onClick={() => loadCoupons()}
+                  disabled={couponListBusy}
+                >
+                  {couponListBusy ? 'Refreshing...' : 'Refresh'}
+                </button>
+              </div>
+              <p className="text-sm text-white/60 mt-1">Disable/enable coupons and adjust expiry safely without changing existing claims.</p>
+              <div className="mt-4 grid md:grid-cols-3 gap-3">
+                <label className="text-sm text-white/70">
+                  Search code
+                  <input
+                    className="mt-1 w-full rounded-lg bg-dark-800 border border-white/15 px-3 py-2 text-white"
+                    value={couponSearch}
+                    onChange={(e) => setCouponSearch(e.target.value.toUpperCase())}
+                    placeholder="Search coupon code"
+                  />
+                </label>
+                <label className="text-sm text-white/70">
+                  Status
+                  <select
+                    className="mt-1 w-full rounded-lg bg-dark-800 border border-white/15 px-3 py-2 text-white"
+                    value={couponStatusFilter}
+                    onChange={(e) => setCouponStatusFilter(e.target.value)}
+                  >
+                    <option value="all">All</option>
+                    <option value="valid_now">Valid now</option>
+                    <option value="active">Active</option>
+                    <option value="disabled">Disabled</option>
+                    <option value="expired">Expired</option>
+                  </select>
+                </label>
+                <label className="text-sm text-white/70">
+                  Claim state
+                  <select
+                    className="mt-1 w-full rounded-lg bg-dark-800 border border-white/15 px-3 py-2 text-white"
+                    value={couponClaimFilter}
+                    onChange={(e) => setCouponClaimFilter(e.target.value)}
+                  >
+                    <option value="all">All</option>
+                    <option value="unclaimed">Unclaimed</option>
+                    <option value="claimed">Claimed</option>
+                    <option value="exhausted">Exhausted</option>
+                  </select>
+                </label>
+              </div>
+              <div className="mt-4 overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="text-white/50 border-b border-white/10">
+                      <th className="text-left py-2">Code</th>
+                      <th className="text-left py-2">Credits</th>
+                      <th className="text-left py-2">Claims</th>
+                      <th className="text-left py-2">Status</th>
+                      <th className="text-left py-2">Expiry</th>
+                      <th className="text-right py-2">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredCoupons.length === 0 ? (
+                      <tr>
+                        <td className="py-4 text-white/45" colSpan={6}>
+                          {couponListBusy ? 'Loading coupons...' : 'No coupons match current filters.'}
+                        </td>
+                      </tr>
+                    ) : filteredCoupons.map((coupon) => {
+                      const busy = !!couponActionBusyByCode[coupon.couponCode]
+                      return (
+                        <tr key={coupon.couponCode} className="border-b border-white/5">
+                          <td className="py-3 font-mono text-white/80">{coupon.couponCode}</td>
+                          <td className="py-3 text-white/70">{coupon.credits}</td>
+                          <td className="py-3 text-white/70">{coupon.claimedCount || 0} / {coupon.maxClaims || '-'}</td>
+                          <td className="py-3">
+                            <span className={`rounded-full px-2 py-1 text-xs ${coupon.active ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-400/25' : 'bg-rose-500/15 text-rose-300 border border-rose-400/25'}`}>
+                              {coupon.active ? 'Active' : 'Disabled'}
+                            </span>
+                          </td>
+                          <td className="py-3">
+                            <input
+                              type="datetime-local"
+                              className="w-52 rounded-lg bg-dark-800 border border-white/15 px-2 py-1.5 text-white"
+                              value={expiryDraftByCode[coupon.couponCode] || ''}
+                              onChange={(e) => setExpiryDraftByCode((prev) => ({ ...prev, [coupon.couponCode]: e.target.value }))}
+                              disabled={busy}
+                            />
+                          </td>
+                          <td className="py-3">
+                            <div className="flex justify-end gap-2">
+                              <button
+                                type="button"
+                                className="btn-secondary"
+                                onClick={() => toggleCouponActive(coupon.couponCode, !coupon.active)}
+                                disabled={busy}
+                              >
+                                {coupon.active ? 'Disable' : 'Enable'}
+                              </button>
+                              <button
+                                type="button"
+                                className="btn-primary"
+                                onClick={() => updateCouponExpiry(coupon.couponCode)}
+                                disabled={busy}
+                              >
+                                Save Expiry
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </section>
 
             <section className="mt-8 glass-card rounded-xl p-5">

@@ -48,6 +48,8 @@ export const billingApi = {
   getAdminSummary: () => apiRequest('/billing/admin/summary', { auth: true }),
   redeemCoupon: (code) => apiRequest('/billing/redeem-coupon', { method: 'POST', auth: true, body: { code } }),
   createCoupon: (payload) => apiRequest('/billing/admin/coupons', { method: 'POST', auth: true, body: payload }),
+  listCoupons: (limit = 200) => apiRequest(`/billing/admin/coupons?limit=${encodeURIComponent(limit)}`, { auth: true }),
+  updateCoupon: (payload) => apiRequest('/billing/admin/coupons/update', { method: 'POST', auth: true, body: payload }),
 }
 
 export const authApi = {
