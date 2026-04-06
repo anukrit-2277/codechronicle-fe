@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useRef } from 'react'
 import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import {
@@ -17,7 +18,6 @@ const features = [
         color: 'from-neon-cyan/20 to-neon-cyan/5',
         iconColor: 'text-neon-cyan',
         glowColor: 'group-hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]',
-        breathe: 'glow-breathe-cyan',
     },
     {
         icon: Target,
@@ -26,7 +26,6 @@ const features = [
         color: 'from-neon-purple/20 to-neon-purple/5',
         iconColor: 'text-neon-purple',
         glowColor: 'group-hover:shadow-[0_0_30px_rgba(167,139,250,0.15)]',
-        breathe: 'glow-breathe-purple',
     },
     {
         icon: FileText,
@@ -35,7 +34,6 @@ const features = [
         color: 'from-neon-blue/20 to-neon-blue/5',
         iconColor: 'text-neon-blue',
         glowColor: 'group-hover:shadow-[0_0_30px_rgba(96,165,250,0.15)]',
-        breathe: 'glow-breathe-blue',
     },
     {
         icon: Shield,
@@ -44,7 +42,6 @@ const features = [
         color: 'from-neon-cyan/20 to-neon-cyan/5',
         iconColor: 'text-neon-cyan',
         glowColor: 'group-hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]',
-        breathe: 'glow-breathe-cyan',
     },
     {
         icon: MessageSquare,
@@ -53,7 +50,6 @@ const features = [
         color: 'from-neon-purple/20 to-neon-purple/5',
         iconColor: 'text-neon-purple',
         glowColor: 'group-hover:shadow-[0_0_30px_rgba(167,139,250,0.15)]',
-        breathe: 'glow-breathe-purple',
     },
     {
         icon: Activity,
@@ -62,11 +58,10 @@ const features = [
         color: 'from-neon-blue/20 to-neon-blue/5',
         iconColor: 'text-neon-blue',
         glowColor: 'group-hover:shadow-[0_0_30px_rgba(96,165,250,0.15)]',
-        breathe: 'glow-breathe-blue',
     },
 ]
 
-function Tilt3DCard({ children, className, breatheAnim }) {
+function Tilt3DCard({ children, className }) {
     const ref = useRef(null)
     const x = useMotionValue(0)
     const y = useMotionValue(0)
@@ -158,7 +153,6 @@ export default function Features() {
                         <motion.div key={index} variants={cardVariants}>
                             <Tilt3DCard
                                 className={`group glass-card rounded-2xl p-5 sm:p-6 transition-all duration-500 hover:scale-[1.02] ${feature.glowColor}`}
-                                breatheAnim={feature.breathe}
                             >
                                 {/* Icon with glow pulse */}
                                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3`}

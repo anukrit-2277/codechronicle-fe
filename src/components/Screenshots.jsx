@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
@@ -24,6 +25,11 @@ const screenshots = [
         tab: 'Risk Dashboard',
     },
 ]
+
+function deterministicUnit(index, seed = 1) {
+    const x = Math.sin((index + 1) * (seed * 12.9898)) * 43758.5453
+    return x - Math.floor(x)
+}
 
 function MockScreenshot({ screenshot, index, onTabClick }) {
     const colors = ['#22d3ee', '#a78bfa', '#60a5fa', '#22d3ee']
@@ -195,7 +201,7 @@ function MockScreenshot({ screenshot, index, onTabClick }) {
                             </div>
                             <div className="h-24 flex items-end gap-1">
                                 {Array.from({ length: 20 }).map((_, i) => {
-                                    const h = 20 + Math.sin(i * 0.5) * 30 + Math.random() * 30
+                                    const h = 20 + Math.sin(i * 0.5) * 30 + deterministicUnit(i, index + 3) * 30
                                     return (
                                         <div
                                             key={i}

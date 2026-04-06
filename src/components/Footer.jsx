@@ -1,11 +1,15 @@
+/* eslint-disable no-unused-vars */
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Github, FileText } from 'lucide-react'
+import { Github, FileText, CreditCard, ShieldCheck } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const links = [
     { icon: Github, label: 'GitHub', href: 'https://github.com/anujkamaljain/CodeChronicle', external: true },
     { icon: FileText, label: 'Documentation', to: '/docs', external: false },
+    { icon: CreditCard, label: 'Pricing', to: '/billing', external: false },
+    { icon: CreditCard, label: 'Admin Billing', to: '/admin/billing', external: false },
+    { icon: ShieldCheck, label: 'Legal', to: '/legal', external: false },
 ]
 
 export default function Footer() {
@@ -79,6 +83,9 @@ export default function Footer() {
                 >
                     <p className="text-xs text-white/25">
                         © {new Date().getFullYear()} CodeChronicle. Built for developers.
+                    </p>
+                    <p className="text-xs text-white/40 mt-2">
+                        Contact: chroniclecode2@gmail.com
                     </p>
                 </motion.div>
             </div>

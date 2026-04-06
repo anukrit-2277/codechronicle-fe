@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ArrowRight, Github } from 'lucide-react'

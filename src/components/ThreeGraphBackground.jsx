@@ -2,9 +2,13 @@ import { useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
+function deterministicUnit(index, seed = 1) {
+    const x = Math.sin((index + 1) * (seed * 12.9898)) * 43758.5453
+    return x - Math.floor(x)
+}
+
 function GraphNodes({ count = 80 }) {
     const mesh = useRef()
-    const light = useRef()
 
     const particles = useMemo(() => {
         const positions = new Float32Array(count * 3)
@@ -18,16 +22,16 @@ function GraphNodes({ count = 80 }) {
         ]
 
         for (let i = 0; i < count; i++) {
-            positions[i * 3] = (Math.random() - 0.5) * 40
-            positions[i * 3 + 1] = (Math.random() - 0.5) * 30
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 25
+            positions[i * 3] = (deterministicUnit(i, 1) - 0.5) * 40
+            positions[i * 3 + 1] = (deterministicUnit(i, 2) - 0.5) * 30
+            positions[i * 3 + 2] = (deterministicUnit(i, 3) - 0.5) * 25
 
-            const c = palette[Math.floor(Math.random() * palette.length)]
+            const c = palette[Math.floor(deterministicUnit(i, 4) * palette.length)]
             colors[i * 3] = c[0]
             colors[i * 3 + 1] = c[1]
             colors[i * 3 + 2] = c[2]
 
-            sizes[i] = Math.random() * 0.08 + 0.02
+            sizes[i] = deterministicUnit(i, 5) * 0.08 + 0.02
         }
 
         return { positions, colors, sizes }
@@ -83,12 +87,12 @@ function GraphEdges({ count = 40 }) {
         const colors = new Float32Array(count * 6)
 
         for (let i = 0; i < count; i++) {
-            const x1 = (Math.random() - 0.5) * 36
-            const y1 = (Math.random() - 0.5) * 28
-            const z1 = (Math.random() - 0.5) * 20
-            const x2 = x1 + (Math.random() - 0.5) * 8
-            const y2 = y1 + (Math.random() - 0.5) * 6
-            const z2 = z1 + (Math.random() - 0.5) * 6
+            const x1 = (deterministicUnit(i, 6) - 0.5) * 36
+            const y1 = (deterministicUnit(i, 7) - 0.5) * 28
+            const z1 = (deterministicUnit(i, 8) - 0.5) * 20
+            const x2 = x1 + (deterministicUnit(i, 9) - 0.5) * 8
+            const y2 = y1 + (deterministicUnit(i, 10) - 0.5) * 6
+            const z2 = z1 + (deterministicUnit(i, 11) - 0.5) * 6
 
             positions[i * 6] = x1
             positions[i * 6 + 1] = y1

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 

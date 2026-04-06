@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
@@ -9,6 +10,7 @@ const navLinks = [
     { label: 'How It Works', href: '#how-it-works' },
     { label: 'Preview', href: '#screenshots' },
     { label: 'Docs', href: '/docs', isRoute: true },
+    { label: 'Pricing', href: '/billing', isRoute: true },
 ]
 
 export default function Navbar() {
@@ -57,7 +59,7 @@ export default function Navbar() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-                    ? 'bg-[#020617]/80 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
+                    ? 'bg-dark-900/80 backdrop-blur-xl border-b border-white/6 shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
                     : 'bg-transparent'
                     }`}
             >
@@ -114,7 +116,7 @@ export default function Navbar() {
                         {/* Install CTA */}
                         <div className="hidden md:block">
                             <motion.a
-                                href="vscode:extension/AnujKamalJain.codechronicle"
+                                href="/billing"
                                 className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium relative overflow-hidden
                                     bg-gradient-to-r from-neon-cyan to-neon-blue text-dark-900
                                     hover:shadow-[0_0_20px_rgba(34,211,238,0.25)]
@@ -123,7 +125,7 @@ export default function Navbar() {
                                 whileTap={{ scale: 0.97 }}
                                 transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                             >
-                                Install
+                                Buy Credits
                             </motion.a>
                         </div>
 
@@ -180,14 +182,14 @@ export default function Navbar() {
                                 )
                             })}
                             <motion.a
-                                href="vscode:extension/AnujKamalJain.codechronicle"
+                                href="/billing"
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.3, delay: navLinks.length * 0.05 }}
                                 className="mt-2 text-center px-4 py-3 rounded-lg text-sm font-medium
                                     bg-gradient-to-r from-neon-cyan to-neon-blue text-dark-900"
                             >
-                                Install Extension
+                                Buy Credits
                             </motion.a>
                         </div>
                     </motion.div>
