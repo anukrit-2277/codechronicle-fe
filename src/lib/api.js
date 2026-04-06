@@ -46,6 +46,8 @@ export const billingApi = {
   getWallet: () => apiRequest('/billing/wallet', { auth: true }),
   createOrder: (planId) => apiRequest('/billing/create-order', { method: 'POST', auth: true, body: { planId } }),
   getAdminSummary: () => apiRequest('/billing/admin/summary', { auth: true }),
+  redeemCoupon: (code) => apiRequest('/billing/redeem-coupon', { method: 'POST', auth: true, body: { code } }),
+  createCoupon: (payload) => apiRequest('/billing/admin/coupons', { method: 'POST', auth: true, body: payload }),
 }
 
 export const authApi = {

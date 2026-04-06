@@ -37,6 +37,8 @@ npm run build
 - Each plan card has **Buy Now**:
   - authenticated users -> `/billing`
   - unauthenticated users -> `/login?redirect=/billing`
+- Billing includes a **Redeem Coupon Code** modal for account-level coupon credit redemption.
+- Admin billing includes coupon creation and redeemed-credit visibility.
 - Login page includes account sync hint for extension users.
 - Login back button avoids protected-route redirect loops.
 

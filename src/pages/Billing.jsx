@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Info } from 'lucide-react'
+import { Info, TicketPercent, X } from 'lucide-react'
 import { billingApi } from '../lib/api'
 import { useAuth } from '../lib/auth-context'
 import DashboardPageHeader from '../components/DashboardPageHeader'
@@ -32,6 +32,10 @@ export default function Billing() {
   const [activityTypeFilter, setActivityTypeFilter] = useState('all')
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
+  const [isRedeemOpen, setIsRedeemOpen] = useState(false)
+  const [couponCode, setCouponCode] = useState('')
+  const [redeemBusy, setRedeemBusy] = useState(false)
+  const [redeemFeedback, setRedeemFeedback] = useState('')
   const emailHint = query.get('emailHint')
 
   useEffect(() => {
@@ -40,22 +44,24 @@ export default function Billing() {
     }
   }, [loading, isAuthenticated, navigate, emailHint])
 
+  const loadBillingData = useCallback(async (mountedRef = { current: true }) => {
+    try {
+      const [plansResp, walletResp] = await Promise.all([billingApi.getPlans(), billingApi.getWallet()])
+      if (!mountedRef.current) return
+      setPlans(plansResp.plans || [])
+      setWallet(walletResp)
+    } catch (err) {
+      if (!mountedRef.current) return
+      setError(err.message || 'Unable to load billing details.')
+    }
+  }, [])
+
   useEffect(() => {
     if (!isAuthenticated) return
-    let mounted = true
-    ;(async () => {
-      try {
-        const [plansResp, walletResp] = await Promise.all([billingApi.getPlans(), billingApi.getWallet()])
-        if (!mounted) return
-        setPlans(plansResp.plans || [])
-        setWallet(walletResp)
-      } catch (err) {
-        if (!mounted) return
-        setError(err.message || 'Unable to load billing details.')
-      }
-    })()
-    return () => { mounted = false }
-  }, [isAuthenticated])
+    const mountedRef = { current: true }
+    loadBillingData(mountedRef)
+    return () => { mountedRef.current = false }
+  }, [isAuthenticated, loadBillingData])
 
   async function startCheckout(planId) {
     setError('')
@@ -82,6 +88,24 @@ export default function Billing() {
       setError(err.message || 'Payment initialization failed.')
     } finally {
       setBusyPlanId('')
+    }
+  }
+
+  async function redeemCouponCode() {
+    if (!couponCode.trim()) return
+    setRedeemBusy(true)
+    setRedeemFeedback('')
+    setError('')
+    try {
+      const result = await billingApi.redeemCoupon(couponCode.trim())
+      await loadBillingData()
+      setRedeemFeedback(`Coupon ${result.couponCode} redeemed successfully. +${result.credits} credits added.`)
+      setCouponCode('')
+      setIsRedeemOpen(false)
+    } catch (err) {
+      setRedeemFeedback(err.message || 'Unable to redeem coupon. Please try again.')
+    } finally {
+      setRedeemBusy(false)
     }
   }
 
@@ -216,16 +240,72 @@ export default function Billing() {
         {error ? <p className="text-red-400 mb-4">{error}</p> : null}
 
         <section>
-          <div className="flex items-center gap-2 mb-4">
-            <h2 className="text-xl font-semibold">Buy Credits</h2>
-            <div className="relative group">
-              <Info className="w-4 h-4 text-white/40 cursor-help transition-colors group-hover:text-cyan-400" />
-              <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-64 rounded-lg bg-dark-800 border border-cyan-400/20 shadow-xl px-4 py-3 text-xs text-white/80 leading-relaxed opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 pointer-events-none">
-                Purchased credits never expire. They remain in your account until you use them, so you can buy at your own pace and use them whenever you need.
-                <div className="absolute left-1/2 -translate-x-1/2 top-full w-2 h-2 bg-dark-800 border-b border-r border-cyan-400/20 rotate-45 -mt-1" />
+          <div className="flex items-center justify-between gap-3 mb-4">
+            <div className="flex items-center gap-2">
+              <h2 className="text-xl font-semibold">Buy Credits</h2>
+              <div className="relative group">
+                <Info className="w-4 h-4 text-white/40 cursor-help transition-colors group-hover:text-cyan-400" />
+                <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-64 rounded-lg bg-dark-800 border border-cyan-400/20 shadow-xl px-4 py-3 text-xs text-white/80 leading-relaxed opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 pointer-events-none">
+                  Purchased credits never expire. They remain in your account until you use them, so you can buy at your own pace and use them whenever you need.
+                  <div className="absolute left-1/2 -translate-x-1/2 top-full w-2 h-2 bg-dark-800 border-b border-r border-cyan-400/20 rotate-45 -mt-1" />
+                </div>
               </div>
             </div>
+            <button
+              type="button"
+              onClick={() => {
+                setRedeemFeedback('')
+                setIsRedeemOpen(true)
+              }}
+              className="inline-flex items-center gap-2 rounded-xl border border-neon-purple/35 bg-neon-purple/10 px-4 py-2 text-sm font-medium text-neon-purple transition hover:bg-neon-purple/15 disabled:opacity-50"
+              disabled={accountMismatch || dataLoading}
+            >
+              <TicketPercent className="w-4 h-4" />
+              Redeem Coupon Code
+            </button>
           </div>
+          {redeemFeedback ? (
+            <div className={`mb-4 rounded-xl border px-4 py-3 text-sm ${redeemFeedback.includes('successfully') ? 'border-emerald-400/35 bg-emerald-500/8 text-emerald-200' : 'border-rose-400/35 bg-rose-500/8 text-rose-200'}`}>
+              {redeemFeedback}
+            </div>
+          ) : null}
+          {isRedeemOpen ? (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/65 p-4">
+              <div className="w-full max-w-md rounded-2xl border border-neon-purple/30 bg-dark-900 shadow-2xl shadow-neon-purple/15">
+                <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+                  <h3 className="text-base font-semibold">Redeem Coupon Code</h3>
+                  <button
+                    type="button"
+                    onClick={() => setIsRedeemOpen(false)}
+                    className="rounded-lg border border-white/15 p-1.5 text-white/70 transition hover:text-white hover:border-white/30"
+                    aria-label="Close coupon modal"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+                <div className="px-5 py-4 space-y-3">
+                  <p className="text-sm text-white/65">Enter the coupon code shared with you to add credits to this account.</p>
+                  <input
+                    value={couponCode}
+                    onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                    placeholder="E.g. CC-WELCOME-2026"
+                    className="w-full rounded-xl border border-white/15 bg-dark-800 px-3 py-2.5 text-white placeholder:text-white/35 focus:outline-none focus:border-neon-purple/40"
+                  />
+                  <p className="text-xs text-white/45">Each account can claim a specific coupon code only once.</p>
+                </div>
+                <div className="flex items-center justify-end gap-2 border-t border-white/10 px-5 py-4">
+                  <button type="button" onClick={() => setIsRedeemOpen(false)} className="btn-secondary" disabled={redeemBusy}>
+                    Cancel
+                  </button>
+                  <button type="button" onClick={redeemCouponCode} className="btn-primary" disabled={redeemBusy || !couponCode.trim()}>
+                    {redeemBusy ? (
+                      <span className="flex items-center gap-2"><span className="spinner spinner-sm" /> Redeeming...</span>
+                    ) : 'Redeem'}
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : null}
           {dataLoading ? (
             <div className="grid md:grid-cols-3 gap-4">
               {[1, 2, 3].map((i) => (

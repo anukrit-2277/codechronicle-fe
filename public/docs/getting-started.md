@@ -55,5 +55,7 @@ npx serverless remove --stage dev --region us-east-1
 3. If logged in, you are sent to `/billing`.
 4. If not logged in, you are sent to `/login?redirect=/billing`.
 5. Sign in with the same account used in the extension so credits stay synced.
+6. Optionally use **Redeem Coupon Code** on billing to claim promo credits.
+7. Admin users can create coupon codes from `/admin/billing`.
 
 Credits purchased through billing are account-based and do not expire.

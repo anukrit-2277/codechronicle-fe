@@ -78,3 +78,6 @@ Provides codebase-wide health overview: health score gauge (0–100), risk distr
 - Plans route users to billing with auth-aware redirects.
 - Extension and website billing are account-synced.
 - Credits do not expire.
+- Users can redeem coupon codes from billing (one claim per account per code).
+- Admins can create coupon codes from the admin billing dashboard.
+- Admin metrics include total credits redeemed in addition to sold/consumed/reversed.
