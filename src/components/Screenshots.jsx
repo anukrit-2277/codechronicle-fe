@@ -119,7 +119,7 @@ function MockScreenshot({ screenshot, index, onTabClick }) {
                                 <div className="hidden sm:block w-32 space-y-2">
                                     <div className="text-[10px] font-mono text-white/30 mb-2">MODULES</div>
                                     {['core/', 'auth/', 'api/', 'ui/'].map((f, i) => (
-                                        <div key={i} className="px-2 py-1.5 rounded bg-white/[0.03] text-[10px] font-mono text-white/40 flex items-center gap-2">
+                                        <div key={i} className="px-2 py-1.5 rounded bg-white/3 text-[10px] font-mono text-white/40 flex items-center gap-2">
                                             <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: colors[i] }} />
                                             {f}
                                         </div>
@@ -151,7 +151,7 @@ function MockScreenshot({ screenshot, index, onTabClick }) {
                             </div>
                             <div className="space-y-2 mt-4">
                                 {['UserService.ts', 'SessionManager.ts', 'TokenValidator.ts', 'AuthMiddleware.ts'].map((f, i) => (
-                                    <div key={i} className="flex items-center gap-3 px-3 py-2 rounded-lg bg-white/[0.02]">
+                                    <div key={i} className="flex items-center gap-3 px-3 py-2 rounded-lg bg-white/2">
                                         <div className={`w-2 h-2 rounded-full ${i === 0 ? 'bg-red-400' : i === 1 ? 'bg-yellow-400' : 'bg-green-400'}`} />
                                         <span className="text-xs font-mono text-white/50">{f}</span>
                                         <span className="text-[10px] text-white/30 ml-auto">{['Critical', 'Warning', 'Safe', 'Safe'][i]}</span>
@@ -245,10 +245,10 @@ export default function Screenshots() {
     }
 
     return (
-        <section ref={sectionRef} id="screenshots" className="relative min-h-[auto] sm:min-h-screen flex flex-col justify-center py-12 sm:py-10 scroll-mt-20 overflow-hidden">
+        <section ref={sectionRef} id="screenshots" className="relative min-h-auto sm:min-h-screen flex flex-col justify-center py-12 sm:py-10 scroll-mt-20 overflow-hidden">
             {/* Ambient glow */}
-            <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-neon-blue/[0.05] rounded-full blur-[150px] pointer-events-none" />
-            <div className="absolute bottom-0 right-1/3 w-[400px] h-[400px] bg-neon-cyan/[0.04] rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-neon-blue/5 rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-0 right-1/3 w-[400px] h-[400px] bg-neon-cyan/4 rounded-full blur-[120px] pointer-events-none" />
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
                 {/* Header */}
                 <motion.div
@@ -305,7 +305,7 @@ export default function Screenshots() {
                             onClick={prev}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
-                            className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-white/20 transition-all hover:bg-white/[0.03]"
+                            className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-white/20 transition-all hover:bg-white/3"
                         >
                             <ChevronLeft className="w-5 h-5" />
                         </motion.button>
@@ -334,7 +334,7 @@ export default function Screenshots() {
                             onClick={next}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
-                            className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-white/20 transition-all hover:bg-white/[0.03]"
+                            className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-white/20 transition-all hover:bg-white/3"
                         >
                             <ChevronRight className="w-5 h-5" />
                         </motion.button>

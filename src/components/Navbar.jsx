@@ -104,7 +104,7 @@ export default function Navbar() {
                                         {isActive && (
                                             <motion.div
                                                 layoutId="activeNav"
-                                                className="absolute inset-0 bg-neon-cyan/[0.08] rounded-lg border border-neon-cyan/20"
+                                                className="absolute inset-0 bg-neon-cyan/8 rounded-lg border border-neon-cyan/20"
                                                 transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                                             />
                                         )}
@@ -118,7 +118,7 @@ export default function Navbar() {
                             <motion.a
                                 href="/billing"
                                 className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium relative overflow-hidden
-                                    bg-gradient-to-r from-neon-cyan to-neon-blue text-dark-900
+                                    bg-linear-to-r from-neon-cyan to-neon-blue text-dark-900
                                     hover:shadow-[0_0_20px_rgba(34,211,238,0.25)]
                                     transition-all duration-300"
                                 whileHover={{ scale: 1.05, y: -1 }}
@@ -159,7 +159,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0, backdropFilter: 'blur(20px)' }}
                         exit={{ opacity: 0, y: -20, backdropFilter: 'blur(0px)' }}
                         transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                        className="fixed inset-x-0 top-24 z-40 bg-[#020617]/95 border-b border-white/[0.06] md:hidden"
+                        className="fixed inset-x-0 top-24 z-40 bg-dark-900/95 border-b border-white/6 md:hidden"
                     >
                         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
                             {navLinks.map((link, i) => {
@@ -173,8 +173,8 @@ export default function Navbar() {
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ duration: 0.3, delay: i * 0.05 }}
                                         className={`px-4 py-3 rounded-lg text-sm font-medium transition-all ${isActive
-                                            ? 'text-neon-cyan bg-neon-cyan/[0.08] border border-neon-cyan/20'
-                                            : 'text-white/50 hover:text-white/80 hover:bg-white/[0.03]'
+                                            ? 'text-neon-cyan bg-neon-cyan/8 border border-neon-cyan/20'
+                                            : 'text-white/50 hover:text-white/80 hover:bg-white/3'
                                             }`}
                                     >
                                         {link.label}
@@ -187,7 +187,7 @@ export default function Navbar() {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.3, delay: navLinks.length * 0.05 }}
                                 className="mt-2 text-center px-4 py-3 rounded-lg text-sm font-medium
-                                    bg-gradient-to-r from-neon-cyan to-neon-blue text-dark-900"
+                                    bg-linear-to-r from-neon-cyan to-neon-blue text-dark-900"
                             >
                                 Buy Credits
                             </motion.a>

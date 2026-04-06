@@ -10,8 +10,8 @@ export default function Trust() {
     return (
         <section ref={sectionRef} id="trust" className="relative py-24 sm:py-32">
             {/* Ambient glow */}
-            <div className="absolute top-0 right-1/3 w-[500px] h-[500px] bg-neon-blue/[0.04] rounded-full blur-[150px] pointer-events-none" />
-            <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-neon-purple/[0.04] rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-0 right-1/3 w-[500px] h-[500px] bg-neon-blue/4 rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-neon-purple/4 rounded-full blur-[120px] pointer-events-none" />
             <div className="max-w-6xl mx-auto px-6">
                 {/* Header */}
                 <motion.div
@@ -77,7 +77,7 @@ export default function Trust() {
                             We can finally see the full picture before making changes."
                         </p>
                         <div className="flex items-center justify-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-cyan to-neon-purple flex items-center justify-center text-sm font-bold">
+                            <div className="w-10 h-10 rounded-full bg-linear-to-br from-neon-cyan to-neon-purple flex items-center justify-center text-sm font-bold">
                                 SK
                             </div>
                             <div className="text-left">

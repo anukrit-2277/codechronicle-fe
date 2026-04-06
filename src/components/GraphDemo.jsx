@@ -36,8 +36,8 @@ export default function GraphDemo() {
     return (
         <section ref={sectionRef} id="graph-demo" className="relative min-h-screen flex flex-col justify-center pt-4 pb-12 scroll-mt-28 overflow-hidden">
             {/* Ambient glow */}
-            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-neon-cyan/[0.04] rounded-full blur-[150px] pointer-events-none" />
-            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-neon-purple/[0.04] rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-neon-cyan/4 rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-neon-purple/4 rounded-full blur-[120px] pointer-events-none" />
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
                 {/* Header */}
                 <motion.div

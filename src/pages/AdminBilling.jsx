@@ -41,11 +41,11 @@ export default function AdminBilling() {
   }, [isAuthenticated])
 
   if (loading || (!isAuthenticated && !error)) {
-    return <div className="min-h-screen bg-[#020617] text-white flex items-center justify-center">Loading admin dashboard...</div>
+    return <div className="min-h-screen bg-dark-900 text-white flex items-center justify-center">Loading admin dashboard...</div>
   }
 
   return (
-    <main className="min-h-screen bg-[#020617] text-white px-4 py-12">
+    <main className="min-h-screen bg-dark-900 text-white px-4 py-12">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>

@@ -122,10 +122,10 @@ export default function Features() {
     const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
     return (
-        <section ref={sectionRef} id="features" className="relative min-h-[auto] sm:min-h-screen flex flex-col justify-center py-12 sm:py-10 scroll-mt-20 overflow-hidden">
+        <section ref={sectionRef} id="features" className="relative min-h-auto sm:min-h-screen flex flex-col justify-center py-12 sm:py-10 scroll-mt-20 overflow-hidden">
             {/* Ambient glow */}
-            <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-neon-purple/[0.04] rounded-full blur-[150px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-neon-blue/[0.04] rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-neon-purple/4 rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-neon-blue/4 rounded-full blur-[120px] pointer-events-none" />
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
                 {/* Header */}
                 <motion.div
@@ -155,7 +155,7 @@ export default function Features() {
                                 className={`group glass-card rounded-2xl p-5 sm:p-6 transition-all duration-500 hover:scale-[1.02] ${feature.glowColor}`}
                             >
                                 {/* Icon with glow pulse */}
-                                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3`}
+                                <div className={`w-12 h-12 rounded-xl bg-linear-to-br ${feature.color} flex items-center justify-center mb-4 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3`}
                                     style={{ transform: 'translateZ(10px)' }}
                                 >
                                     <feature.icon className={`w-6 h-6 ${feature.iconColor} transition-all duration-300`} />
@@ -174,7 +174,7 @@ export default function Features() {
                                 </p>
 
                                 {/* Bottom glow line */}
-                                <div className="mt-4 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                <div className="mt-4 h-px bg-linear-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             </Tilt3DCard>
                         </motion.div>
                     ))}

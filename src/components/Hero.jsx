@@ -29,14 +29,14 @@ export default function Hero() {
             className="relative min-h-screen flex items-center justify-center overflow-hidden"
         >
             {/* Gradient overlays */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#020617]/40 via-transparent to-[#020617]/40 z-[1]" />
-            <div className="absolute inset-0 grid-pattern z-[1] opacity-40" />
+            <div className="absolute inset-0 bg-linear-to-r from-dark-900/40 via-transparent to-dark-900/40 z-1" />
+            <div className="absolute inset-0 grid-pattern z-1 opacity-40" />
 
             {/* Floating geometric shapes */}
             {floatingShapes.map((shape, i) => (
                 <motion.div
                     key={i}
-                    className="absolute pointer-events-none z-[2] hidden sm:block"
+                    className="absolute pointer-events-none z-2 hidden sm:block"
                     style={{ left: shape.x, top: shape.y }}
                     initial={{ opacity: 0, scale: 0, rotate: -180 }}
                     animate={isInView ? { opacity: 0.07, scale: 1, rotate: 0 } : {}}

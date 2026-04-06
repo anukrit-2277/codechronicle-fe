@@ -9,7 +9,7 @@ export default function FloatingBadges() {
                 href="https://kiro.dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="fixed bottom-5 left-5 z-[999] flex items-center gap-3 px-4 py-3 rounded-2xl no-underline group cursor-pointer"
+                className="fixed bottom-5 left-5 z-999 flex items-center gap-3 px-4 py-3 rounded-2xl no-underline group cursor-pointer"
                 style={{
                     background: 'rgba(15, 23, 42, 0.65)',
                     backdropFilter: 'blur(14px)',
@@ -35,7 +35,7 @@ export default function FloatingBadges() {
                 href="https://aws.amazon.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="fixed bottom-5 right-5 z-[999] flex items-center gap-3 px-4 py-3 rounded-2xl no-underline group cursor-pointer"
+                className="fixed bottom-5 right-5 z-999 flex items-center gap-3 px-4 py-3 rounded-2xl no-underline group cursor-pointer"
                 style={{
                     background: 'rgba(15, 23, 42, 0.65)',
                     backdropFilter: 'blur(14px)',

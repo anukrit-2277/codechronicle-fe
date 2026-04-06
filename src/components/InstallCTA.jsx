@@ -8,7 +8,7 @@ export default function InstallCTA() {
     const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
     return (
-        <section ref={sectionRef} id="install" className="relative min-h-[auto] sm:min-h-screen flex flex-col justify-center py-16 sm:py-32 scroll-mt-20 overflow-hidden">
+        <section ref={sectionRef} id="install" className="relative min-h-auto sm:min-h-screen flex flex-col justify-center py-16 sm:py-32 scroll-mt-20 overflow-hidden">
             {/* Ambient lighting */}
             <div className="absolute top-1/4 left-[10%] w-[500px] h-[500px] rounded-full blur-[180px] pointer-events-none"
                 style={{ background: 'radial-gradient(circle, rgba(34,211,238,0.08) 0%, transparent 60%)' }} />
@@ -109,7 +109,7 @@ export default function InstallCTA() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl font-medium text-base sm:text-lg
                             text-white/70 hover:text-white transition-all duration-300
-                            bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.08]"
+                            bg-white/3 border border-white/8 hover:bg-white/8"
                         whileHover={{ y: -3, boxShadow: '0 10px 40px rgba(0,0,0,0.3)' }}
                         whileTap={{ scale: 0.98 }}
                         transition={{ type: 'spring', stiffness: 400, damping: 20 }}

@@ -47,10 +47,10 @@ export default function HowItWorks() {
     const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
     return (
-        <section ref={sectionRef} id="how-it-works" className="relative min-h-[auto] sm:min-h-screen flex flex-col justify-center py-12 sm:py-10 scroll-mt-20 overflow-hidden">
+        <section ref={sectionRef} id="how-it-works" className="relative min-h-auto sm:min-h-screen flex flex-col justify-center py-12 sm:py-10 scroll-mt-20 overflow-hidden">
             {/* Ambient glow */}
-            <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-neon-cyan/[0.05] rounded-full blur-[150px] pointer-events-none" />
-            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-neon-blue/[0.04] rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-neon-cyan/5 rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-neon-blue/4 rounded-full blur-[120px] pointer-events-none" />
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
                 {/* Header */}
                 <motion.div
@@ -77,9 +77,9 @@ export default function HowItWorks() {
                         animate={isInView ? { scaleX: 1 } : {}}
                         transition={{ duration: 1.2, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
                     >
-                        <div className="w-full h-full bg-gradient-to-r from-neon-cyan/30 via-neon-purple/30 to-neon-blue/30" />
+                        <div className="w-full h-full bg-linear-to-r from-neon-cyan/30 via-neon-purple/30 to-neon-blue/30" />
                         <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-neon-cyan/60 via-neon-purple/60 to-neon-blue/60 blur-[2px]"
+                            className="absolute inset-0 bg-linear-to-r from-neon-cyan/60 via-neon-purple/60 to-neon-blue/60 blur-[2px]"
                             initial={{ opacity: 0 }}
                             animate={isInView ? { opacity: [0, 0.6, 0.3] } : {}}
                             transition={{ duration: 2, delay: 1.5 }}
@@ -101,7 +101,7 @@ export default function HowItWorks() {
                             >
                                 {/* Step number background */}
                                 <motion.div
-                                    className="absolute -top-4 left-1/2 -translate-x-1/2 text-[120px] font-black text-white/[0.02] leading-none select-none pointer-events-none"
+                                    className="absolute -top-4 left-1/2 -translate-x-1/2 text-[120px] font-black text-white/2 leading-none select-none pointer-events-none"
                                     initial={{ opacity: 0, scale: 0.5 }}
                                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                                     transition={{ duration: 1, delay: 0.5 + index * 0.3 }}
