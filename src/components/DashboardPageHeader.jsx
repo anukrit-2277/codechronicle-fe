@@ -26,7 +26,7 @@ export default function DashboardPageHeader({
         to={backTo}
         className="inline-flex items-center gap-2 text-sm font-medium text-white/45 hover:text-cyan-400 transition-colors duration-200 mb-5 group"
       >
-        <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] group-hover:border-cyan-400/35 group-hover:bg-cyan-400/5 transition-all duration-200">
+        <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/3 group-hover:border-cyan-400/35 group-hover:bg-cyan-400/5 transition-all duration-200">
           <ArrowLeft className="w-4 h-4" />
         </span>
         {backLabel}
@@ -45,7 +45,7 @@ export default function DashboardPageHeader({
           <button
             type="button"
             onClick={handleLogout}
-            className="inline-flex items-center gap-2 rounded-xl border border-rose-400/25 bg-rose-500/[0.06] px-4 py-2.5 text-sm font-medium text-rose-200/90 hover:bg-rose-500/15 hover:border-rose-400/45 hover:text-rose-100 transition-all duration-200"
+            className="inline-flex items-center gap-2 rounded-xl border border-rose-400/25 bg-rose-500/6 px-4 py-2.5 text-sm font-medium text-rose-200/90 hover:bg-rose-500/15 hover:border-rose-400/45 hover:text-rose-100 transition-all duration-200"
           >
             <LogOut className="w-4 h-4 opacity-90" />
             Logout

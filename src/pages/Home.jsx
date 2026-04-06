@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import Hero from '../components/Hero'
 import InstallGuide from '../components/InstallGuide'
 import GraphDemo from '../components/GraphDemo'
@@ -7,7 +8,7 @@ import Screenshots from '../components/Screenshots'
 import Stats from '../components/Stats'
 import InstallCTA from '../components/InstallCTA'
 import Footer from '../components/Footer'
-import PersistentBackground from '../components/PersistentBackground'
+const PersistentBackground = lazy(() => import('../components/PersistentBackground'))
 
 function GlowOrb({ color = 'cyan', position = 'left', top = '0px', delay = 0 }) {
     const colors = {
@@ -30,7 +31,7 @@ function GlowOrb({ color = 'cyan', position = 'left', top = '0px', delay = 0 }) 
 }
 
 import Navbar from '../components/Navbar'
-import ThreeGraphBackground from '../components/ThreeGraphBackground'
+const ThreeGraphBackground = lazy(() => import('../components/ThreeGraphBackground'))
 
 export default function Home() {
     return (
@@ -38,11 +39,11 @@ export default function Home() {
             {/* Navbar */}
             <Navbar />
 
-            {/* 3D animated background -fixed across entire page */}
-            <ThreeGraphBackground />
-
-            {/* Persistent particle background */}
-            <PersistentBackground />
+            {/* Lazy-load heavy animated backgrounds into separate chunks */}
+            <Suspense fallback={null}>
+                <ThreeGraphBackground />
+                <PersistentBackground />
+            </Suspense>
 
             {/* Grid overlay across entire page */}
             <div className="fixed inset-0 z-0 pointer-events-none grid-pattern opacity-30" />

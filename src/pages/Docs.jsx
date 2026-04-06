@@ -81,14 +81,14 @@ export default function Docs() {
     }, [loading, scrollToSection])
 
     return (
-        <div className="min-h-screen bg-[#020617]">
+        <div className="min-h-screen bg-dark-900">
             {/* Top bar */}
-            <div className="sticky top-0 z-50 bg-[#020617]/90 backdrop-blur-xl border-b border-white/[0.06]">
+            <div className="sticky top-0 z-50 bg-dark-900/90 backdrop-blur-xl border-b border-white/6">
                 <div className="w-full px-4 sm:px-8 h-14 flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <button
                             onClick={() => setSidebarOpen(!sidebarOpen)}
-                            className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg text-white/50 hover:text-white hover:bg-white/[0.06] transition-colors"
+                            className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg text-white/50 hover:text-white hover:bg-white/6 transition-colors"
                         >
                             {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                         </button>
@@ -118,8 +118,8 @@ export default function Docs() {
                 <aside className={`
                     fixed md:sticky top-14 z-40 h-[calc(100vh-3.5rem)]
                     w-[260px] shrink-0 overflow-y-auto
-                    bg-[#020617] md:bg-transparent
-                    border-r border-white/[0.06]
+                    bg-dark-900 md:bg-transparent
+                    border-r border-white/6
                     transition-transform duration-300 ease-in-out
                     ${sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
                 `}>
@@ -138,8 +138,8 @@ export default function Docs() {
                                         w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-[0.8125rem]
                                         transition-all duration-200 cursor-pointer
                                         ${isActive
-                                            ? 'bg-neon-cyan/[0.08] text-neon-cyan border border-neon-cyan/20'
-                                            : 'text-white/40 hover:text-white/70 hover:bg-white/[0.04] border border-transparent'
+                                            ? 'bg-neon-cyan/8 text-neon-cyan border border-neon-cyan/20'
+                                            : 'text-white/40 hover:text-white/70 hover:bg-white/4 border border-transparent'
                                         }
                                     `}
                                 >
@@ -165,7 +165,7 @@ export default function Docs() {
                                     key={section.id}
                                     id={section.id}
                                     ref={el => (sectionRefs.current[section.id] = el)}
-                                    className={i > 0 ? 'mt-16 pt-16 border-t border-white/[0.04]' : ''}
+                                    className={i > 0 ? 'mt-16 pt-16 border-t border-white/4' : ''}
                                 >
                                     <article className="docs-prose">
                                         <ReactMarkdown
@@ -179,7 +179,7 @@ export default function Docs() {
                             ))}
 
                             {/* Footer */}
-                            <div className="mt-20 pt-10 border-t border-white/[0.05] text-center pb-16">
+                            <div className="mt-20 pt-10 border-t border-white/5 text-center pb-16">
                                 <p className="text-white/25 text-sm">
                                     Built with deterministic analysis and AI reasoning.
                                 </p>
