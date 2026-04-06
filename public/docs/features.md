@@ -71,3 +71,10 @@ Lets developers ask questions in plain English. The extension ranks files by rel
 ## 8. Risk Dashboard and Health Overview
 
 Provides codebase-wide health overview: health score gauge (0–100), risk distribution bar, most risky files, most connected files, and exportable Markdown risk reports.
+
+## 9. Credits, Plans, and Billing UX
+
+- Public plans page at `/plans` with clear pricing and benefit breakdown.
+- Plans route users to billing with auth-aware redirects.
+- Extension and website billing are account-synced.
+- Credits do not expire.

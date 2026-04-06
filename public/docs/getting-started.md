@@ -45,3 +45,15 @@ npx serverless deploy --stage dev --region us-east-1
 ```bash
 npx serverless remove --stage dev --region us-east-1
 ```
+
+---
+
+## Website Pricing and Billing Flow
+
+1. Open **Pricing** (`/plans`) from website header or footer.
+2. Review plans and click **Buy Now**.
+3. If logged in, you are sent to `/billing`.
+4. If not logged in, you are sent to `/login?redirect=/billing`.
+5. Sign in with the same account used in the extension so credits stay synced.
+
+Credits purchased through billing are account-based and do not expire.

@@ -4,7 +4,6 @@ import { ArrowLeft, Menu, X, BookOpen, Layers, Cloud, Zap, Code2, Settings, Wren
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
-import FloatingBadges from '../components/FloatingBadges'
 
 const sections = [
     { id: 'introduction', label: 'Introduction', icon: BookOpen, file: '/docs/introduction.md' },
@@ -155,8 +154,9 @@ export default function Docs() {
                 {/* Main content */}
                 <main className="flex-1 min-w-0 px-6 sm:px-10 lg:px-16 py-10 md:py-14">
                     {loading ? (
-                        <div className="flex items-center justify-center py-32">
-                            <div className="w-8 h-8 border-2 border-neon-cyan/30 border-t-neon-cyan rounded-full animate-spin" />
+                        <div className="flex flex-col items-center justify-center py-32 gap-4">
+                            <div className="spinner" />
+                            <p className="text-white/40 text-sm">Loading documentation...</p>
                         </div>
                     ) : (
                         <div className="max-w-3xl">
@@ -199,8 +199,6 @@ export default function Docs() {
                     )}
                 </main>
             </div>
-
-            <FloatingBadges />
         </div>
     )
 }

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Github, Star, Shield, Download } from 'lucide-react'
+import { Star, Shield, Download } from 'lucide-react'
 
 export default function Trust() {
     const sectionRef = useRef(null)
@@ -35,21 +35,6 @@ export default function Trust() {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="flex flex-wrap justify-center gap-4 sm:gap-6"
                 >
-                    {/* GitHub stars */}
-                    <a
-                        href="https://github.com/anujkamaljain/CodeChronicle"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="glass-card rounded-xl px-6 py-4 flex items-center gap-3 hover:scale-105 transition-all duration-300 group"
-                    >
-                        <Github className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
-                        <div className="flex items-center gap-2">
-                            <Star className="w-4 h-4 text-yellow-400" />
-                            <span className="text-sm font-medium text-white/70 group-hover:text-white/90 transition-colors">
-                                GitHub Stars
-                            </span>
-                        </div>
-                    </a>
 
                     {/* Open source */}
                     <div className="glass-card rounded-xl px-6 py-4 flex items-center gap-3 hover:scale-105 transition-all duration-300">

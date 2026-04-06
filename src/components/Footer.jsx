@@ -1,13 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Github, FileText, CreditCard, ShieldCheck } from 'lucide-react'
+import { FileText, CreditCard, ShieldCheck } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const links = [
-    { icon: Github, label: 'GitHub', href: 'https://github.com/anujkamaljain/CodeChronicle', external: true },
     { icon: FileText, label: 'Documentation', to: '/docs', external: false },
-    { icon: CreditCard, label: 'Pricing', to: '/billing', external: false },
+    { icon: CreditCard, label: 'Pricing', to: '/plans', external: false },
     { icon: CreditCard, label: 'Admin Billing', to: '/admin/billing', external: false },
     { icon: ShieldCheck, label: 'Legal', to: '/legal', external: false },
 ]

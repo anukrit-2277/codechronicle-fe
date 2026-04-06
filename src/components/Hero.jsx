@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
-import { ArrowRight, Github, Users, Zap } from 'lucide-react'
+import { ArrowRight, Users, Zap } from 'lucide-react'
 
 const floatingShapes = [
     { x: '8%', y: '22%', size: 60, delay: 0, duration: 20 },
@@ -204,16 +204,6 @@ export default function Hero() {
                     >
                         Install Extension
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </a>
-
-                    <a
-                        href="https://github.com/anujkamaljain/CodeChronicle"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-secondary text-lg"
-                    >
-                        <Github className="w-5 h-5" />
-                        View GitHub
                     </a>
                 </motion.div>
             </motion.div>

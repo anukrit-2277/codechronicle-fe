@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { billingApi } from '../lib/api'
 import { useAuth } from '../lib/auth-context'
+import DashboardPageHeader from '../components/DashboardPageHeader'
 
 function MetricCard({ label, value, suffix = '' }) {
   return (
@@ -41,19 +42,27 @@ export default function AdminBilling() {
   }, [isAuthenticated])
 
   if (loading || (!isAuthenticated && !error)) {
-    return <div className="min-h-screen bg-dark-900 text-white flex items-center justify-center">Loading admin dashboard...</div>
+    return (
+      <div className="min-h-screen bg-dark-900 text-white flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="spinner" />
+          <p className="text-white/40 text-sm">Loading admin dashboard...</p>
+        </div>
+      </div>
+    )
   }
+
+  const dataLoading = isAuthenticated && !data && !error
 
   return (
     <main className="min-h-screen bg-dark-900 text-white px-4 py-12">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold gradient-text">Admin Billing Dashboard</h1>
-            <p className="text-white/60 text-sm mt-2">Signed in as {user?.email}</p>
-          </div>
-          <Link to="/billing" className="btn-secondary text-sm">Back to Billing</Link>
-        </div>
+        <DashboardPageHeader
+          backTo="/"
+          backLabel="Back"
+          title="Admin Billing Dashboard"
+          subtitle={user?.email ? `Signed in as ${user.email}` : 'Admin console'}
+        />
 
         {error ? (
           <div className="glass-card rounded-xl p-4 border border-red-400/40 text-red-300">
@@ -61,7 +70,24 @@ export default function AdminBilling() {
           </div>
         ) : null}
 
-        {data ? (
+        {dataLoading ? (
+          <>
+            <section className="grid md:grid-cols-3 gap-4">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="skeleton-card">
+                  <div className="skeleton skeleton-text-sm w-28" />
+                  <div className="skeleton skeleton-heading mt-3" style={{ width: '5rem' }} />
+                </div>
+              ))}
+            </section>
+            <div className="skeleton-card mt-8">
+              <div className="skeleton skeleton-text w-48" />
+              <div className="skeleton skeleton-text w-64 mt-4" />
+              <div className="skeleton skeleton-text w-56" />
+              <div className="skeleton skeleton-text w-44" />
+            </div>
+          </>
+        ) : data ? (
           <>
             <section className="grid md:grid-cols-3 gap-4">
               <MetricCard label="Users With Wallets" value={data.usersWithWallets || 0} />
@@ -78,7 +104,7 @@ export default function AdminBilling() {
               <h2 className="text-lg font-semibold">Quick Health Indicators</h2>
               <div className="mt-4 space-y-2 text-sm text-white/70">
                 <p>Net sold credits (sold - reversed): <span className="text-white font-semibold">{(data.creditsSold || 0) - (data.creditsReversed || 0)}</span></p>
-                <p>Unconsumed net credits: <span className="text-white font-semibold">{((data.creditsSold || 0) - (data.creditsReversed || 0)) - (data.creditsConsumed || 0)}</span></p>
+                <p>Outstanding credits (wallet truth): <span className="text-white font-semibold">{data.totalOutstandingCredits || 0}</span></p>
                 <p>Last updated: <span className="text-white font-semibold">{new Date(data.updatedAt).toLocaleString()}</span></p>
               </div>
             </section>

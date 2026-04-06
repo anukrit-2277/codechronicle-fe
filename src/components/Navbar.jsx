@@ -10,7 +10,7 @@ const navLinks = [
     { label: 'How It Works', href: '#how-it-works' },
     { label: 'Preview', href: '#screenshots' },
     { label: 'Docs', href: '/docs', isRoute: true },
-    { label: 'Pricing', href: '/billing', isRoute: true },
+    { label: 'Pricing', href: '/plans', isRoute: true },
 ]
 
 export default function Navbar() {

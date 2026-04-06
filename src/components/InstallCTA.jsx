@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ArrowRight, Github } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 export default function InstallCTA() {
     const sectionRef = useRef(null)
@@ -101,21 +101,6 @@ export default function InstallCTA() {
                             Install Extension
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
                         </span>
-                    </motion.a>
-
-                    <motion.a
-                        href="https://github.com/anujkamaljain/CodeChronicle"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl font-medium text-base sm:text-lg
-                            text-white/70 hover:text-white transition-all duration-300
-                            bg-white/3 border border-white/8 hover:bg-white/8"
-                        whileHover={{ y: -3, boxShadow: '0 10px 40px rgba(0,0,0,0.3)' }}
-                        whileTap={{ scale: 0.98 }}
-                        transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-                    >
-                        <Github className="w-5 h-5" />
-                        View on GitHub
                     </motion.a>
                 </motion.div>
             </div>

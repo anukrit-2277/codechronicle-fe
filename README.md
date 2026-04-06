@@ -1,14 +1,48 @@
-# React + Vite
+# CodeChronicle Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Marketing, docs, auth, and billing frontend for CodeChronicle.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React + Vite
+- React Router
+- Tailwind CSS
+- Framer Motion
 
-## React Compiler
+## Run Locally
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
+
+## Build and Lint
+
+```bash
+npm run lint
+npm run build
+```
+
+## Route Notes
+
+- `/` public landing page
+- `/plans` public pricing/plans page (credits do not expire)
+- `/login` login page (supports redirect/next params)
+- `/billing` authenticated user billing dashboard
+- `/admin/billing` authenticated admin billing dashboard
+
+## Pricing and Billing UX Flow
+
+- Header/footer **Pricing** links route to `/plans`.
+- Each plan card has **Buy Now**:
+  - authenticated users -> `/billing`
+  - unauthenticated users -> `/login?redirect=/billing`
+- Login page includes account sync hint for extension users.
+- Login back button avoids protected-route redirect loops.
+
+## Notes
+
+- Route transitions force scroll to top on navigation.
+- Billing pages use shared dashboard header back navigation.
 
 

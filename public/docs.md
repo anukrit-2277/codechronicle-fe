@@ -12,6 +12,17 @@ The core philosophy is **local-first**: all structural analysis (scanning, parsi
 
 ---
 
+## Latest UX and Billing Updates
+
+- Added public pricing page at `/plans` with plan benefits and buy flow.
+- Header/footer pricing links now point to `/plans` instead of `/billing`.
+- Website navigation now scrolls to top automatically on route changes.
+- Login page back navigation prevents loops from guarded billing routes.
+- Login page includes account-sync guidance for extension users.
+- Extension includes **Buy Credits** action that opens billing/login on the website.
+
+---
+
 ## Key Features
 
 | Feature | Description | Requires Cloud |
