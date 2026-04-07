@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, CheckCircle2, Infinity as InfinityIcon, Sparkles } from 'lucide-react'
 import { billingApi } from '../lib/api'
+import { formatUsdFromInr } from '../lib/currencyDisplay'
 import { useAuth } from '../lib/auth-context'
 
 function PlanSkeleton() {
@@ -130,7 +131,11 @@ export default function Plans() {
               <p className="text-white/70 text-sm">{plan.name}</p>
               <div className="mt-3">
                 <p className="text-white/40 line-through text-sm">Rs {plan.originalAmountInr}</p>
-                <p className="text-3xl font-bold">Rs {plan.amountInr}</p>
+                <p className="text-3xl font-bold flex items-baseline gap-2">
+                  <span>Rs {plan.amountInr}</span>
+                  <span className="text-white/35 text-base font-normal">/</span>
+                  <span className="text-xs text-white/45 font-medium">{formatUsdFromInr(plan.amountInr)}</span>
+                </p>
               </div>
 
               <div className="mt-4 space-y-1">

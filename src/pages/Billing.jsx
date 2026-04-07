@@ -4,6 +4,7 @@ import { Info, TicketPercent, X } from 'lucide-react'
 import { billingApi } from '../lib/api'
 import { useAuth } from '../lib/auth-context'
 import DashboardPageHeader from '../components/DashboardPageHeader'
+import { formatUsdFromInr } from '../lib/currencyDisplay'
 
 function loadRazorpayScript() {
   return new Promise((resolve, reject) => {
@@ -336,7 +337,11 @@ export default function Billing() {
                   <p className="text-white/70 text-sm">{plan.name}</p>
                   <div className="mt-3">
                     <p className="text-white/40 line-through text-sm">Rs {plan.originalAmountInr}</p>
-                    <p className="text-3xl font-bold">Rs {plan.amountInr}</p>
+                    <p className="text-3xl font-bold flex items-baseline gap-2">
+                      <span>Rs {plan.amountInr}</span>
+                      <span className="text-white/35 text-base font-normal">/</span>
+                      <span className="text-xs text-white/45 font-medium">{formatUsdFromInr(plan.amountInr)}</span>
+                    </p>
                   </div>
                   <p className="text-white/70 mt-3">{plan.baseCredits} credits</p>
                   <p className="text-neon-cyan text-sm mt-1">First recharge bonus: +{plan.firstPurchaseBonusCredits}</p>
