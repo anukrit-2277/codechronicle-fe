@@ -133,7 +133,7 @@ export default function Hero() {
                         >
                             <Users className="w-3.5 h-3.5 text-neon-cyan" />
                             <span className="text-xs sm:text-sm font-semibold text-white/60">
-                                Trusted by 500+ Developers
+                                Trusted by 800+ Developers
                             </span>
                         </span>
 
