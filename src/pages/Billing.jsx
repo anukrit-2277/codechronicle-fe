@@ -69,6 +69,10 @@ export default function Billing() {
     try {
       await loadRazorpayScript()
       const order = await billingApi.createOrder(planId)
+      if (!order?.orderId || !order?.razorpayKeyId) {
+        throw new Error('Invalid payment order response from server.')
+      }
+
       const razorpay = new window.Razorpay({
         key: order.razorpayKeyId,
         amount: order.amountInr * 100,
@@ -82,6 +86,12 @@ export default function Billing() {
         handler: function () {
           navigate('/billing/success')
         },
+      })
+      razorpay.on('payment.failed', function (response) {
+        const gatewayError = response?.error || {}
+        const message = gatewayError.description || gatewayError.reason || gatewayError.code || 'Payment failed at gateway.'
+        const context = [gatewayError.source, gatewayError.step].filter(Boolean).join(' / ')
+        setError(context ? `${message} (${context})` : message)
       })
       razorpay.open()
     } catch (err) {
